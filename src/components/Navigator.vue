@@ -14,9 +14,9 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <p>
+          <eiei>
          <img :src=$store.state.user.Image> 
-         </p>
+         </eiei>
           {{ $store.state.user.Name }}
         </b-nav-form>
 
@@ -60,7 +60,7 @@ img {
   width: 40px;
   border-radius: 50%;
 }
-p{
+eiei{
   margin-right: 10px;
 }
 

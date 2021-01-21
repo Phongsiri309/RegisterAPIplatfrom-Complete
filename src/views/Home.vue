@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-
+    <p v-if="$store.state.user">
      <service-input></service-input>
-
+    </p>
     <service-table></service-table>
 
   
