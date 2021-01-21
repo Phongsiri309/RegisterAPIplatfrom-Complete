@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+     <service-input></service-input>
+
+    <service-table></service-table>
+
+  
   </div>
 </template>
 
 <script>
+import ServiceInput from '../components/ServiceInput.vue'
+import ServiceTable from '../components/ServiceTable.vue'
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
+  components: { ServiceTable, ServiceInput },
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  
 }
 </script>
