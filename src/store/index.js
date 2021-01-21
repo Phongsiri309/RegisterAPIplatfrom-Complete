@@ -1,7 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { LoaderPlugin } from "vue-google-login";
 
+const CLIENT_ID =
+  "1042372769466-ctqeoo0isdkbt1pethp8no473sejgl7h.apps.googleusercontent.com";
+
+Vue.use(LoaderPlugin, {
+  client_id: CLIENT_ID,
+});
+Vue.GoogleAuth.then((auth2) => {
+  console.log(auth2.isSignedIn.get());
+  console.log(auth2.currentUser.get());
+});
 Vue.use(Vuex);
 
 export default new Vuex.Store({
