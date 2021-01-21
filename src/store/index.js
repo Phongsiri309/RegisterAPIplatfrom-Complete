@@ -49,16 +49,11 @@ export default new Vuex.Store({
         });
     },
     servicelist({ commit }) {
-      let params = {
-        limit: 10,
-      };
-      axios
-        .get("https://apicontroller.herokuapp.com/ApiList", { params })
-        .then((res) => {
-          var data = res.data;
-          console.log(data);
-          commit("SET_SERVIVCE", data);
-        });
+      axios.get("https://apicontroller.herokuapp.com/ApiList").then((res) => {
+        var data = res.data;
+        console.log(data);
+        commit("SET_SERVIVCE", data);
+      });
     },
     Insertservice(context, payload) {
       axios
