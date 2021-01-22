@@ -61,7 +61,6 @@ export default new Vuex.Store({
           var reciveuser = getuser.data;
           context.commit("SET_USERLOGIN", reciveuser);
           context.commit("SET_SID", reciveuser.user_id);
-          console.log(reciveuser);
         });
     },
     servicelist({ commit }) {
@@ -76,7 +75,6 @@ export default new Vuex.Store({
         .post("https://apicontroller.herokuapp.com/ApiSignUp", payload)
         .then((res) => {
           context.commit("SET_ISTATUS", res);
-          console.log(res);
         });
     },
   },

@@ -39,7 +39,7 @@ export default {
             this.$store.dispatch('addUser',payload)
 
         },onCurrentUser(googleUser) {
-      console.log('onCurrentUser', googleUser);
+    
       var current = googleUser.getBasicProfile()
        var id_token = googleUser.getAuthResponse().id_token;
       let payload = {
@@ -49,12 +49,14 @@ export default {
                 Token: id_token
             }
             this.$store.dispatch('addUser',payload)
+		},onFailure(err) {
+			console.log(err)
 		},
        
         },mounted() {
 		Vue.GoogleAuth.then(auth2 => {
-			console.log(auth2.isSignedIn.get());
-			console.log(auth2.currentUser.get())
+			auth2.isSignedIn.get()
+			auth2.currentUser.get()
 		});
 	}
 }

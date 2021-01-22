@@ -15,9 +15,9 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <eiei>
+          <div class="eiei">
          <img :src=$store.state.user.google_photo> 
-         </eiei>
+         </div>
           {{ $store.state.user.gmail }}
         </b-nav-form>
         <b-nav-item-dropdown right>
@@ -60,7 +60,7 @@ img {
   width: 40px;
   border-radius: 50%;
 }
-eiei{
+div.eiei{
   margin-right: 10px;
 }
 
