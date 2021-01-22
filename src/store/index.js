@@ -9,18 +9,15 @@ const CLIENT_ID =
 Vue.use(LoaderPlugin, {
   client_id: CLIENT_ID,
 });
-Vue.GoogleAuth.then((auth2) => {
-  console.log(auth2.isSignedIn.get());
-  console.log(auth2.currentUser.get());
-});
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     user: "",
     params: {
-      client_id:
-        "1042372769466-ctqeoo0isdkbt1pethp8no473sejgl7h.apps.googleusercontent.com",
+      client_id: CLIENT_ID,
+      scope: "https://www.googleapis.com/auth/gmail.readonly",
     },
     // only needed if you want to render the button with the google ui
     renderParams: {
@@ -32,6 +29,7 @@ export default new Vuex.Store({
     serviceadd: {},
     serviceid: "",
     Insertstatus: [],
+    cuser: "",
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -46,15 +44,22 @@ export default new Vuex.Store({
     SET_ISTATUS(state, Ista) {
       state.Insertstatus = Ista;
     },
+    SET_CUSER(state, Current) {
+      state.cuser = Current;
+    },
   },
   actions: {
+    gUser(context, payload) {
+      context.commit("SET_CUSER", payload);
+    },
     addUser(context, payload) {
-      context.commit("SET_USERLOGIN", payload);
+      // context.commit("SET_USERLOGIN", payload);
       axios
-        .post("https://apicontroller.herokuapp.com/User", this.state.user)
+        .post("https://apicontroller.herokuapp.com/User", payload)
         .then((res) => {
           var getuser = res.data[0];
           var reciveuser = getuser.data;
+          context.commit("SET_USERLOGIN", reciveuser);
           context.commit("SET_SID", reciveuser.user_id);
           console.log(reciveuser);
         });
@@ -62,7 +67,7 @@ export default new Vuex.Store({
     servicelist({ commit }) {
       axios.get("https://apicontroller.herokuapp.com/ApiList").then((res) => {
         var data = res.data;
-        console.log(data);
+        // console.log(data);
         commit("SET_SERVIVCE", data);
       });
     },

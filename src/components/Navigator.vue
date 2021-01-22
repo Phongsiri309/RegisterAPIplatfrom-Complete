@@ -16,9 +16,9 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <eiei>
-         <img :src=$store.state.user.Image> 
+         <img :src=$store.state.user.google_photo> 
          </eiei>
-          {{ $store.state.user.Name }}
+          {{ $store.state.user.gmail }}
         </b-nav-form>
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
