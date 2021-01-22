@@ -1,6 +1,6 @@
 <template>
   <div id="Navigator">
-     <b-navbar toggleable="lg" type="dark" variant="info" >
+     <b-navbar toggleable="lg" type="dark" variant="info" fixed="top" :style="{height:`60px`}">
     <b-navbar-brand>API platform</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -15,17 +15,19 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <div class="eiei">
-         <img :src=$store.state.user.google_photo> 
-         </div>
-          {{ $store.state.user.gmail }}
+         
+         
         </b-nav-form>
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template #button-content v-if="$store.state.user">
+         
+         <img :src=$store.state.user.google_photo> 
+           {{ $store.state.user.gmail }} 
+         
           </template>
           <template #button-content v-else >
-            <em>SignIn</em>
+            SignIn
           </template>
           <b-dropdown-item href="/" >
             <google-sign-in></google-sign-in>
@@ -57,11 +59,16 @@ export default {
 <style scoped>
 
 img {
-  width: 40px;
+  
+  width: 30px;
   border-radius: 50%;
 }
 div.eiei{
+  
   margin-right: 10px;
+}
+em{
+  display: flex;
 }
 
 </style>

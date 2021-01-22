@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <p v-if="$store.state.user">
-     <service-input></service-input>
-    </p>
+    
     <service-table></service-table>
     
 		<br />
@@ -11,12 +9,12 @@
 </template>
 
 <script>
-import ServiceInput from '../components/ServiceInput.vue'
+
 import ServiceTable from '../components/ServiceTable.vue'
 // @ is an alias to /src
 
 export default {
-  components: { ServiceTable, ServiceInput },
+  components: { ServiceTable},
   name: 'Home',
  
 

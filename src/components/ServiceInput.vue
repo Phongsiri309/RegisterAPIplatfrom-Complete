@@ -1,6 +1,7 @@
 <template>
   <div id="ServiceInput">
       <div class="container">
+        <div class="ei2">
 <b-input-group class="mt-3">
     <b-form-input v-model="Sname" placeholder="Servicename. . ."></b-form-input>
      <b-form-input v-model="Sentry" placeholder="Entrypoint. . ."></b-form-input>
@@ -9,7 +10,7 @@
       <b-button variant="outline-success" :style="{width:`50px`}" v-on:click='addService'><img src="@/assets/icons8_plus_math.png" :style="{width:`20px`,height:`20px`}"></b-button>
     </b-input-group-append>
   </b-input-group>
-  </div>
+  </div></div>
   </div>
 </template>
 
@@ -45,5 +46,7 @@ export default {
 </script>
 
 <style>
-
+.ei2{
+  padding-top: 80px;
+}
 </style>

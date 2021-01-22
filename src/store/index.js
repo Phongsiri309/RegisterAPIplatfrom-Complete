@@ -29,7 +29,6 @@ export default new Vuex.Store({
     serviceadd: {},
     serviceid: "",
     Insertstatus: [],
-    cuser: "",
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -44,14 +43,8 @@ export default new Vuex.Store({
     SET_ISTATUS(state, Ista) {
       state.Insertstatus = Ista;
     },
-    SET_CUSER(state, Current) {
-      state.cuser = Current;
-    },
   },
   actions: {
-    gUser(context, payload) {
-      context.commit("SET_CUSER", payload);
-    },
     addUser(context, payload) {
       // context.commit("SET_USERLOGIN", payload);
       axios
@@ -66,7 +59,7 @@ export default new Vuex.Store({
     servicelist({ commit }) {
       axios.get("https://apicontroller.herokuapp.com/ApiList").then((res) => {
         var data = res.data;
-        // console.log(data);
+        console.log(data);
         commit("SET_SERVIVCE", data);
       });
     },
