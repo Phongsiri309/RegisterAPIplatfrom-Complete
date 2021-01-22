@@ -2,24 +2,23 @@
   <div id="ServiceTable">
     <div class="container">
       <div class="eieiTable">
-        <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Service Name</th>
-      <th scope="col">Entrypoint</th>
-      <th scope="col">Permission</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="service in this.$store.state.servicelist " :key="service.id">
-    
-    <td>{{ service.service_name }}</td>
-             <td>{{ service.api_url }}</td>
-              <td>{{ service.permission }}</td>
-    </tr>
-    
-  </tbody>
-</table>
+        
+<div class="col">
+  <b-card-group deck v-for="service in this.$store.state.servicelist " :key="service.service_id" >
+    <div class="row">
+    <b-card header-tag="header" footer-tag="footer" align="left" >
+      <template #header>
+        <b-card-title>{{ service.service_name }}</b-card-title>
+        <h6 class="mb-0">Author : Phonsiris</h6>
+      </template>
+      <b-card-text>Descriptions : {{ service.permission }} </b-card-text>
+      <template #footer>
+        <em>Entrypoint : {{ service.api_url }}</em>
+      </template>
+    </b-card>
+  </div>
+  </b-card-group>
+</div>
   <div class="overflow-auto">
 
 
@@ -29,6 +28,7 @@
       :total-rows="$store.state.rows"
       :per-page="$store.state.perPage"
       class="mt-4"
+      align="right"
     >
       <template #first-text><span class="text-success">First</span></template>
       <template #prev-text><span class="text-danger">Prev</span></template>
@@ -74,6 +74,24 @@ export default {
 </script>
 
 <style>
+
+.card-deck .card {
+   width: 600px;
+   
+}
+div.col{
+  margin-left: 235px;
+}
+
+div.row{
+  margin: 10px;
+}
+
+.card-deck .card-header{
+  background-color:#760204;
+  color: white;
+}
+
 .container{
     margin: auto;
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="Navigator">
-     <b-navbar toggleable="lg" type="dark" variant="info" fixed="top" :style="{height:`60px`}">
+     <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top" :style="{height:`60px`}">
     <b-navbar-brand>API platform</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -8,8 +8,10 @@
     <b-collapse id="nav-collapse" is-nav>
      
       <b-navbar-nav>
-        <b-nav-item to="/">HOME</b-nav-item>
-        <b-nav-item to="/about" >About</b-nav-item>
+        <b-nav-item to="/">WE API</b-nav-item>
+        <div v-if="$store.state.user">
+        <b-nav-item to="/about" >MY API</b-nav-item>
+        </div>
       </b-navbar-nav>
    
       <!-- Right aligned nav items -->
@@ -57,6 +59,20 @@ export default {
 </script>
 
 <style scoped>
+ .navbar.navbar-dark.bg-dark{
+    background-color: darkred!important;;
+    color: white!important;
+    
+ }
+
+
+#nav a.router-link-exact-active {
+  background-color: #fbfbfd;
+  color: black;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  
+}
 
 img {
   
@@ -69,6 +85,7 @@ div.eiei{
 }
 em{
   display: flex;
+  
 }
 
 </style>

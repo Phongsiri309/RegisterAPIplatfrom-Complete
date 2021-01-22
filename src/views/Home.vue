@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    
+  
     <service-table></service-table>
-    
+   
 		<br />
 	
   </div>
@@ -17,8 +17,5 @@ export default {
   components: { ServiceTable},
   name: 'Home',
  
-
-
-	
 }
 </script>
