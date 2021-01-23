@@ -30,6 +30,7 @@ export default new Vuex.Store({
     serviceid: "",
     Insertstatus: [],
     servicelistUser: [],
+    currentPage: 1,
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -61,10 +62,14 @@ export default new Vuex.Store({
         });
     },
     servicelist({ commit }) {
+      let params = {
+        page: this.state.currentPage,
+      };
       axios
-        .get("https://apicontroller.herokuapp.com/service/list")
+        .get("https://apicontroller.herokuapp.com/service/list", { params })
         .then((res) => {
           var data = res.data;
+
           commit("SET_SERVIVCE", data);
         });
     },
@@ -72,12 +77,21 @@ export default new Vuex.Store({
       axios
         .post("https://apicontroller.herokuapp.com/service/add", payload)
         .then((res) => {
+          if (
+            res.data[0].data.message ==
+            "Service name or EntryPoint is already in use."
+          ) {
+            alert("บันทึกไม่สำเร็จ");
+          } else {
+            alert("บันทึกสำเร็จ");
+          }
+
           context.commit("SET_ISTATUS", res);
         });
     },
     servicelistUser({ commit }) {
       let params = {
-        page: 1,
+        page: this.state.currentPage,
         user_id: this.state.user.user_id,
       };
       axios

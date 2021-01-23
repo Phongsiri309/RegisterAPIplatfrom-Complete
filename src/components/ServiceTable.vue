@@ -1,10 +1,9 @@
 <template>
   <div id="ServiceTable">
-   
+        
       <div class="eieiTable">
         
-
-  <b-card-group deck v-for="service in this.$store.state.servicelist " :key="service.service_id" >
+         <b-card-group deck v-for="service in this.$store.state.servicelist[0] " :key="service.service_id" >
  
     <b-card >
       <template >
@@ -20,13 +19,16 @@
       <template >
         <b-card-footer>
         <div align="left">
-          <em >Entrypoint : {{ service.api_url }}</em>
+          <em >Entrypoint :  {{ service.api_url }}
+            {{service.service_id }}
+          </em>
           </div>
         </b-card-footer>
       </template>
     </b-card>
 
   </b-card-group>
+ 
 
   <div class="overflow-auto">
 
@@ -34,14 +36,15 @@
     <!-- Use HTML and sub-components in slots -->
     <b-pagination
       v-model="$store.state.currentPage"
-      :total-rows="$store.state.rows"
-      :per-page="$store.state.perPage"
+      :total-rows="$store.state.servicelist[1].total"
+      :per-page="perPage"
       class="mt-4"
       align="right"
     >
+    
       <template #first-text><span class="text-success">First</span></template>
       <template #prev-text><span class="text-danger">Prev</span></template>
-      <template #next-text><span class="text-warning">Next</span></template>
+      <template #next-text><span class="text-warning" value=page >Next</span></template>
       <template #last-text><span class="text-info">Last</span></template>
       <template #ellipsis-text>
         <b-spinner small type="grow"></b-spinner>
@@ -53,6 +56,7 @@
         <i v-else>{{ page }}</i>
       </template>
     </b-pagination>
+   
   </div>
 </div>
    
@@ -64,19 +68,20 @@ export default {
     name:'ServiceTable',
     data(){
       return{
-        rows: this.$store.state.servicelist.data,
-      perPage: 10,
-      currentPage: 1,
+        perPage: 10
       }
     },
     mounted(){
+      
        this.$store.dispatch('servicelist').then(
             setInterval(() =>{
              this.$store.dispatch('servicelist')
-             }, 10000)
+             }, 8000)
        ) 
       
-    }
+    },
+   
+    
    
   
 }

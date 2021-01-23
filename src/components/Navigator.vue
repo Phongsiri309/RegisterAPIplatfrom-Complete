@@ -17,7 +17,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-         
+        
          
         </b-nav-form>
         <b-nav-item-dropdown right>

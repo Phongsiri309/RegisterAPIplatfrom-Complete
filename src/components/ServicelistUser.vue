@@ -2,7 +2,7 @@
   <div id="ServicelistUser">
       <div class="container">
          
-  <b-card-group deck v-for="service in this.$store.state.servicelistUser " :key="service.service_id" >
+  <b-card-group deck v-for="service in this.$store.state.servicelistUser[0] " :key="service.id" >
 
     <b-card header-tag="header" footer-tag="footer" align="left" >
       <template #header>
@@ -18,7 +18,10 @@
       </template>
       <b-card-text>Descriptions : {{ service.description }} </b-card-text>
       <template #footer>
-        <em>Entrypoint : {{ service.api_url }}</em>
+        <em>
+          Entrypoint : {{ service.api_url }}
+         
+        </em>
       </template>
     </b-card>
 
