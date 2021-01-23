@@ -29,6 +29,7 @@ export default new Vuex.Store({
     serviceadd: {},
     serviceid: "",
     Insertstatus: [],
+    servicelistUser: [],
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     SET_ISTATUS(state, Ista) {
       state.Insertstatus = Ista;
     },
+    SET_SERVIVCEUSER(state, ServicelistUser) {
+      state.servicelistUser = ServicelistUser;
+    },
   },
   actions: {
     addUser(context, payload) {
@@ -50,7 +54,6 @@ export default new Vuex.Store({
       axios
         .post("https://apicontroller.herokuapp.com/user/login", payload)
         .then((res) => {
-          console.log(res.data);
           var getuser = res.data[0];
           var reciveuser = getuser.data;
           context.commit("SET_USERLOGIN", reciveuser);
@@ -62,7 +65,6 @@ export default new Vuex.Store({
         .get("https://apicontroller.herokuapp.com/service/list")
         .then((res) => {
           var data = res.data;
-          console.log(data);
           commit("SET_SERVIVCE", data);
         });
     },
@@ -71,6 +73,17 @@ export default new Vuex.Store({
         .post("https://apicontroller.herokuapp.com/service/add", payload)
         .then((res) => {
           context.commit("SET_ISTATUS", res);
+        });
+    },
+    servicelistUser({ commit }) {
+      let params = {
+        page: 1,
+        user_id: this.state.user.user_id,
+      };
+      axios
+        .get("https://apicontroller.herokuapp.com/user/service", { params })
+        .then((res) => {
+          commit("SET_SERVIVCEUSER", res.data);
         });
     },
   },

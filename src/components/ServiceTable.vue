@@ -80,7 +80,8 @@ export default {
    
 }
 div.col{
-  margin-left: 235px;
+ display: inline-block;
+  
 }
 
 div.row{
