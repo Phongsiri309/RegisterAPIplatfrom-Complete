@@ -1,24 +1,31 @@
 <template>
   <div id="ServicelistUser">
       <div class="container">
-          <div class="col">
+         
   <b-card-group deck v-for="service in this.$store.state.servicelistUser " :key="service.service_id" >
-    <div class="row">
+
     <b-card header-tag="header" footer-tag="footer" align="left" >
       <template #header>
-        <b-card-title>{{ service.service_name }}</b-card-title>
-        <h6 class="mb-0">Author : Phonsiris</h6>
+        <b-card-title>{{ service.service_name }}
+            <span v-if="service.permission==`public`">
+         <img src="@/assets/icons8_earth_planet.png" align="right">
+         </span>
+         <span v-else>
+        <img src="@/assets/icons8_lock.png" align="right">
+         </span>
+        </b-card-title>
+        <h6 class="mb-0">Author : {{ service.gmail }}</h6>
       </template>
-      <b-card-text>Descriptions : {{ service.permission }} </b-card-text>
+      <b-card-text>Descriptions : {{ service.description }} </b-card-text>
       <template #footer>
         <em>Entrypoint : {{ service.api_url }}</em>
       </template>
     </b-card>
-  </div>
+
   </b-card-group>
 </div>
       </div>
-  </div>
+
 </template>
 
 <script>

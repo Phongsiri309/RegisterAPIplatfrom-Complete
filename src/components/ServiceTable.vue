@@ -1,24 +1,33 @@
 <template>
   <div id="ServiceTable">
-    <div class="container">
+   
       <div class="eieiTable">
         
-<div class="col">
+
   <b-card-group deck v-for="service in this.$store.state.servicelist " :key="service.service_id" >
-    <div class="row">
-    <b-card header-tag="header" footer-tag="footer" align="left" >
-      <template #header>
-        <b-card-title>{{ service.service_name }}</b-card-title>
-        <h6 class="mb-0">Author : Phonsiris</h6>
+ 
+    <b-card >
+      <template >
+        <b-card-header>
+        <b-card-title align="left">{{ service.service_name }}
+          <span v-if="service.permission==`public`">
+         <img src="@/assets/icons8_earth_planet.png" align="right">
+         </span>
+        </b-card-title>
+        <h6 class="mb-0" align="left">Author : {{ service.gmail }}</h6></b-card-header>
       </template>
-      <b-card-text>Descriptions : {{ service.permission }} </b-card-text>
-      <template #footer>
-        <em>Entrypoint : {{ service.api_url }}</em>
+      <b-card-text align="left">Descriptions : {{ service.description }} </b-card-text>
+      <template >
+        <b-card-footer>
+        <div align="left">
+          <em >Entrypoint : {{ service.api_url }}</em>
+          </div>
+        </b-card-footer>
       </template>
     </b-card>
-  </div>
+
   </b-card-group>
-</div>
+
   <div class="overflow-auto">
 
 
@@ -46,7 +55,7 @@
     </b-pagination>
   </div>
 </div>
-    </div>
+   
   </div>
 </template>
 
@@ -75,12 +84,23 @@ export default {
 
 <style>
 
+.card-deck .card-text{
+  padding-top: 20px;
+}
+
 .card-deck .card {
-   width: 600px;
-   
+   width: 200px;
+  border-radius: 20px; 
+  margin: 20px; 
+  
 }
 div.col{
- display: inline-block;
+ border-radius: 20px;
+  
+}
+
+.card-deck{
+ 
   
 }
 
@@ -88,18 +108,23 @@ div.row{
   margin: 10px;
 }
 
+
 .card-deck .card-header{
   background-color:#760204;
   color: white;
+
 }
 
 .container{
-    margin: auto;
+    position: center;
 }
 #ServiceTable{
     padding-top: 25px;
 }
 .eieiTable{
+    margin-left: 20%;
+    margin-right: 20%;
     padding-top: 80px;
+    
 }
 </style>
