@@ -99,10 +99,7 @@ div.col{
   
 }
 
-.card-deck{
- 
-  
-}
+
 
 div.row{
   margin: 10px;
