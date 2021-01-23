@@ -48,8 +48,9 @@ export default new Vuex.Store({
     addUser(context, payload) {
       // context.commit("SET_USERLOGIN", payload);
       axios
-        .post("https://apicontroller.herokuapp.com/User", payload)
+        .post("https://apicontroller.herokuapp.com/user/login", payload)
         .then((res) => {
+          console.log(res.data);
           var getuser = res.data[0];
           var reciveuser = getuser.data;
           context.commit("SET_USERLOGIN", reciveuser);
@@ -57,15 +58,17 @@ export default new Vuex.Store({
         });
     },
     servicelist({ commit }) {
-      axios.get("https://apicontroller.herokuapp.com/ApiList").then((res) => {
-        var data = res.data;
-        console.log(data);
-        commit("SET_SERVIVCE", data);
-      });
+      axios
+        .get("https://apicontroller.herokuapp.com/service/list")
+        .then((res) => {
+          var data = res.data;
+          console.log(data);
+          commit("SET_SERVIVCE", data);
+        });
     },
     Insertservice(context, payload) {
       axios
-        .post("https://apicontroller.herokuapp.com/ApiSignUp", payload)
+        .post("https://apicontroller.herokuapp.com/service/add", payload)
         .then((res) => {
           context.commit("SET_ISTATUS", res);
         });
