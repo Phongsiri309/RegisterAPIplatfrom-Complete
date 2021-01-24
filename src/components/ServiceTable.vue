@@ -1,40 +1,37 @@
 <template>
-  <div id="ServiceTable">
-        
-      <div class="eieiTable">
-        
-         <b-card-group deck v-for="service in this.$store.state.servicelist[0] " :key="service.service_id" >
+  <div id="ServiceTable">   
+    <div class="eieiTable">
+      <p v-if="$store.state.loading"><b-spinner label="Spinning"></b-spinner></p>
+        <p v-else>
+          <b-card-group deck v-for="service in this.$store.state.servicelist[0] " :key="service.service_id" >
+            <b-card >
+              <template >
+                <b-card-header>
+                  <b-card-title align="left">{{ service.service_name }}
+                    <span v-if="service.permission==`public`">
+                      <img src="@/assets/icons8_earth_planet.png" align="right">
+                    </span>
+                  </b-card-title>
+                  <h6 class="mb-0" align="left">Author : {{ service.gmail }}</h6></b-card-header>
+              </template>
+                  <b-card-text align="left">Descriptions : {{ service.description }} </b-card-text>
+              <template >
+              <b-card-footer>
+                  <div align="left">
+                    <em >Entrypoint :  {{ service.api_url }}
+                       {{service.service_id }}
+                   </em>
+                  </div>
+              </b-card-footer>
+              </template>
+            </b-card>
+         </b-card-group>
  
-    <b-card >
-      <template >
-        <b-card-header>
-        <b-card-title align="left">{{ service.service_name }}
-          <span v-if="service.permission==`public`">
-         <img src="@/assets/icons8_earth_planet.png" align="right">
-         </span>
-        </b-card-title>
-        <h6 class="mb-0" align="left">Author : {{ service.gmail }}</h6></b-card-header>
-      </template>
-      <b-card-text align="left">Descriptions : {{ service.description }} </b-card-text>
-      <template >
-        <b-card-footer>
-        <div align="left">
-          <em >Entrypoint :  {{ service.api_url }}
-            {{service.service_id }}
-          </em>
-          </div>
-        </b-card-footer>
-      </template>
-    </b-card>
-
-  </b-card-group>
- 
-
-  <div class="overflow-auto">
+        
 
 
     <!-- Use HTML and sub-components in slots -->
-    <b-pagination
+          <b-pagination
       v-model="$store.state.currentPage"
       :total-rows="$store.state.servicelist[1].total"
       :per-page="perPage"
@@ -56,11 +53,11 @@
         <i v-else>{{ page }}</i>
       </template>
     </b-pagination>
-   
-  </div>
+  
+        </p>
+  
 </div>
-   
-  </div>
+</div>
 </template>
 
 <script>
@@ -73,11 +70,12 @@ export default {
     },
     mounted(){
       
-       this.$store.dispatch('servicelist').then(
-            setInterval(() =>{
-             this.$store.dispatch('servicelist')
-             }, 8000)
-       ) 
+       this.$store.dispatch('servicelist')
+      //  .then(
+      //       setInterval(() =>{
+      //        this.$store.dispatch('servicelist')
+      //        }, 8000)
+      //  ) 
       
     },
    

@@ -3,7 +3,7 @@
       <div class="container">
         <div class="ei2">
 <b-input-group class="mt-3">
-    <b-form-input v-model="Sname" placeholder="Servicename. . ."></b-form-input>
+    <b-form-input v-model="Sname" placeholder="Servicename. . ." ></b-form-input>
      <b-form-input v-model="Sentry" placeholder="Entrypoint. . ."></b-form-input>
     <b-input-group-append>
         <b-form-select v-model="Permission" :options="options"></b-form-select>
@@ -36,8 +36,8 @@ export default {
     name:'ServiceInput',
     data(){
         return{
-            Sname: '',
-            Sentry:'',
+            Sname: null,
+            Sentry: null,
             Permission: "Public",
     options: [
       { value: "Public", text: "Public" },
@@ -55,7 +55,20 @@ export default {
                 permission: this.Permission ,
                 user_id: this.$store.state.serviceid,
             }
-            this.$store.dispatch('Insertservice',payload)
+            this.$store.dispatch('Insertservice',payload).then(
+              setTimeout(() =>{
+            this.$store.dispatch('servicelistUser')
+                }, 3000)
+  
+             
+            ).then(
+               setTimeout(() =>{
+            this.Sname = '',
+              this.Sentry = '',
+              this.Description =''
+                }, 3000)
+              
+            )
 
         },
     }

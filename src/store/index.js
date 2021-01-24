@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import { LoaderPlugin } from "vue-google-login";
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
 
 const CLIENT_ID =
   "1042372769466-ctqeoo0isdkbt1pethp8no473sejgl7h.apps.googleusercontent.com";
@@ -31,6 +33,9 @@ export default new Vuex.Store({
     Insertstatus: [],
     servicelistUser: [],
     currentPage: 1,
+    perPage: 10,
+    statusD: {},
+    loading: false,
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -47,6 +52,9 @@ export default new Vuex.Store({
     },
     SET_SERVIVCEUSER(state, ServicelistUser) {
       state.servicelistUser = ServicelistUser;
+    },
+    SET_DELETESTATUS(state, Status) {
+      state.statusD = Status;
     },
   },
   actions: {
@@ -65,12 +73,14 @@ export default new Vuex.Store({
       let params = {
         page: this.state.currentPage,
       };
+      this.state.loading = true;
       axios
         .get("https://apicontroller.herokuapp.com/service/list", { params })
         .then((res) => {
           var data = res.data;
 
           commit("SET_SERVIVCE", data);
+          this.state.loading = false;
         });
     },
     Insertservice(context, payload) {
@@ -94,10 +104,25 @@ export default new Vuex.Store({
         page: this.state.currentPage,
         user_id: this.state.user.user_id,
       };
+      this.state.loading = true;
       axios
         .get("https://apicontroller.herokuapp.com/user/service", { params })
         .then((res) => {
           commit("SET_SERVIVCEUSER", res.data);
+          this.state.loading = false;
+        });
+    },
+    serviceDelete({ commit }, payload) {
+      commit("SET_DELETESTATUS", payload);
+      axios
+        .delete("https://apicontroller.herokuapp.com/service/delete", {
+          data: {
+            user_id: this.state.statusD.user_id,
+            service_id: this.state.statusD.service_id,
+          },
+        })
+        .then((res) => {
+          commit("SET_DELETESTATUS", res);
         });
     },
   },

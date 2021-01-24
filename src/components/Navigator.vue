@@ -12,6 +12,10 @@
         <div v-if="$store.state.user">
         <b-nav-item to="/about" >MY API</b-nav-item>
         </div>
+        <div v-if="$store.state.user.status ==  'superuser'">
+<b-nav-item to="/Admin" >Super User</b-nav-item>
+        </div>
+         
       </b-navbar-nav>
    
       <!-- Right aligned nav items -->
