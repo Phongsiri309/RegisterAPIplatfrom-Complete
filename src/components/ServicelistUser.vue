@@ -28,12 +28,13 @@
         size="lg"
         v-model="service.description"
         :style="{border:`none`}"
+        v-on:blur="update(service)"
       ></b-form-textarea>
     </b-col>
           </b-card-text>
       <template #footer>
         <em>
-          <b-input-group prepend="Entrypoint" :style="{border:`none`}" class="mt-3" >
+          <b-input-group prepend="Endpoint" :style="{border:`none`}" class="mt-3" >
     <b-form-input v-model="service.api_url" v-on:blur="update(service)" :style="{border:`none`}"></b-form-input>
     
   </b-input-group>
