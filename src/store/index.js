@@ -36,6 +36,7 @@ export default new Vuex.Store({
     perPage: 10,
     statusD: {},
     loading: false,
+    updatesection: {},
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -55,6 +56,9 @@ export default new Vuex.Store({
     },
     SET_DELETESTATUS(state, Status) {
       state.statusD = Status;
+    },
+    SET_UPDATE(state, Section) {
+      state.updatesection = Section;
     },
   },
   actions: {
@@ -123,6 +127,17 @@ export default new Vuex.Store({
         })
         .then((res) => {
           commit("SET_DELETESTATUS", res);
+        });
+    },
+    Updateservice({ commit }, payload) {
+      commit("SET_UPDATE", payload);
+      axios
+        .patch(
+          "https://apicontroller.herokuapp.com/service/update",
+          this.state.updatesection
+        )
+        .then((res) => {
+          console.log(res);
         });
     },
   },

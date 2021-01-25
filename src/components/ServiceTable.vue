@@ -25,7 +25,9 @@
               >
             </template>
             <b-card-text align="left"
-              >Descriptions : {{ service.description }}
+              >
+              
+              Descriptions : {{ service.description }}
             </b-card-text>
             <template>
               <b-card-footer>

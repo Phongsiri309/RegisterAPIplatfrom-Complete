@@ -10,7 +10,9 @@
       <template #header>
         <b-card-title>{{ service.service_name }}
             <span v-if="service.permission==`public`">
+              
          <img src="@/assets/icons8_earth_planet.png" align="right">
+         
          </span>
          <span v-else>
         <img src="@/assets/icons8_lock.png" align="right">
@@ -18,11 +20,24 @@
         </b-card-title>
         <h6 class="mb-0">Author : {{ service.gmail }}</h6>
       </template>
-      <b-card-text>Descriptions : {{ service.description }} </b-card-text>
+      <b-card-text>
+        Descriptions :
+        <b-col sm="10">
+      <b-form-textarea
+        id="textarea-large"
+        size="lg"
+        v-model="service.description"
+        :style="{border:`none`}"
+      ></b-form-textarea>
+    </b-col>
+          </b-card-text>
       <template #footer>
         <em>
-          Entrypoint : {{ service.api_url }}
-         
+          <b-input-group prepend="Entrypoint" :style="{border:`none`}" class="mt-3" >
+    <b-form-input v-model="service.api_url" v-on:blur="update(service)" :style="{border:`none`}"></b-form-input>
+    
+  </b-input-group>
+          
         </em>
         
 
@@ -68,22 +83,20 @@
 export default {
     name:'ServicelistUser',
      mounted(){
-       if(this.$store.state.loading == true){
-            setTimeout(()=>
+      
+          
+        
+        if(this.$store.state.user.user_id){
+        this.$store.dispatch('servicelistUser')
+       }else{
+              setTimeout(()=>
         {
           this.$store.dispatch('servicelistUser')
-        },2000)
-       }else{
-      
-        this.$store.dispatch('servicelistUser')
+        },3000)
+       
        }
        
-      //  .then(
-      // //       setInterval(() =>{
-      // // //        this.$store.dispatch('servicelistUser')
-      // // //        }, 10000)
-      //   ) 
-      
+
     },
   
     methods:{
@@ -98,6 +111,17 @@ export default {
             this.$store.dispatch('servicelistUser')
           },1000)
         )
+      },
+      update(service){
+        let payload = {
+          service_name: service.service_name,
+api_url: service.api_url,
+permission: service.permission,
+service_id: service.service_id,
+user_id: service.user_id,
+description: service.description
+        }
+        this.$store.dispatch('Updateservice',payload)
       }
     }
 

@@ -75,7 +75,6 @@ export default {
   color: black;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  
 }
 
 img {
@@ -87,9 +86,6 @@ div.eiei{
   
   margin-right: 10px;
 }
-em{
-  display: flex;
-  
-}
+
 
 </style>
