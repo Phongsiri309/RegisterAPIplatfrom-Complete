@@ -8,14 +8,23 @@
 
     <b-card header-tag="header" footer-tag="footer" align="left" >
       <template #header>
-        <b-card-title>{{ service.service_name }}
-            <span v-if="service.permission==`public`">
-              
-         <img src="@/assets/icons8_earth_planet.png" align="right">
+        <b-card-title>
+          <input id="servicename" v-model="service.service_name" v-on:blur="update(service)" :style="{border:`none`,background:`rgba(0, 0, 0, 0);`,color:`white`}">
+            <span v-if="service.permission==`public`" >
+               <img src="@/assets/icons8_earth_planet.png" align="right">
+            
+         
+          
          
          </span>
          <span v-else>
-        <img src="@/assets/icons8_lock.png" align="right">
+          
+              <img src="@/assets/icons8_lock.png" align="right">
+            
+            
+    
+    
+        
          </span>
         </b-card-title>
         <h6 class="mb-0">Author : {{ service.gmail }}</h6>
@@ -83,6 +92,13 @@
 <script>
 export default {
     name:'ServicelistUser',
+    data(){
+      return{
+        
+        Private:'private',
+        Public: 'public'
+      }
+    },
      mounted(){
       
           
@@ -117,7 +133,7 @@ export default {
         let payload = {
           service_name: service.service_name,
 api_url: service.api_url,
-permission: service.permission,
+permission: this.Upermission,
 service_id: service.service_id,
 user_id: service.user_id,
 description: service.description
@@ -130,5 +146,11 @@ description: service.description
 </script>
 
 <style>
+#servicename{
+  background-color:rgba(0, 0, 0, 0);
+}
 
+.dropdown{
+  border: none;
+}
 </style>
