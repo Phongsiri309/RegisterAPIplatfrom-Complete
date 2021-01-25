@@ -11,7 +11,7 @@
           :key="service.service_id"
         >
           <b-card>
-            <template>
+            
               <b-card-header>
                 <b-card-title align="left"
                   >{{ service.service_name }}
@@ -23,19 +23,19 @@
                   Author : {{ service.gmail }}
                 </h6></b-card-header
               >
-            </template>
+         
             <b-card-text align="left"
               >
               
               Descriptions : {{ service.description }}
             </b-card-text>
-            <template>
+      
               <b-card-footer>
                 <div align="left">
                   <em>Entrypoint : {{ service.api_url }} </em>
                 </div>
               </b-card-footer>
-            </template>
+          
           </b-card>
         </b-card-group>
 
@@ -79,7 +79,8 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("servicelist");
+    
+        this.$store.dispatch("servicelist");
     //  .then(
     //       setInterval(() =>{
     //        this.$store.dispatch('servicelist')

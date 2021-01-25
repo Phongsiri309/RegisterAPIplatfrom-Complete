@@ -10,7 +10,7 @@
       <b-navbar-nav>
         <b-nav-item to="/">WE API</b-nav-item>
         <div v-if="$store.state.user">
-        <b-nav-item to="/about" >MY API</b-nav-item>
+        <b-nav-item to="/myapi" >MY API</b-nav-item>
         </div>
         <div v-if="$store.state.user.status ==  'superuser'">
 <b-nav-item to="/Admin" >Super User</b-nav-item>

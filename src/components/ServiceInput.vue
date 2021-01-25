@@ -2,12 +2,46 @@
   <div id="ServiceInput">
       <div class="container">
         <div class="ei2">
+          <div v-if="this.$store.state.Insertstatus == `Create Success` ">
+             <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="success"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+    >
+      <p>บันทึกสำเร็จ {{ dismissCountDown }} seconds...</p>
+      <b-progress
+        variant="success"
+        :max="dismissSecs"
+        :value="dismissCountDown"
+        height="4px"
+      ></b-progress>
+    </b-alert>
+    </div>
+    <div v-else>
+      <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="danger"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+    >
+      <p>บันทึกไม่สำเร็จ {{ dismissCountDown }} seconds...</p>
+      <b-progress
+        variant="danger"
+        :max="dismissSecs"
+        :value="dismissCountDown"
+        height="4px"
+      ></b-progress>
+    </b-alert>
+    </div>
 <b-input-group class="mt-3">
     <b-form-input v-model="Sname" placeholder="Servicename. . ." ></b-form-input>
      <b-form-input v-model="Sentry" placeholder="Entrypoint. . ."></b-form-input>
     <b-input-group-append>
         <b-form-select v-model="Permission" :options="options"></b-form-select>
-      <b-button variant="outline-success" :style="{width:`50px`}" v-on:click='addService'><img src="@/assets/icons8_plus_math.png" :style="{width:`20px`,height:`20px`}"></b-button>
+      <b-button variant="outline-success" :style="{width:`50px`}" v-on:click='addService' @click="showAlert"><img src="@/assets/icons8_plus_math.png" :style="{width:`20px`,height:`20px`}"></b-button>
     </b-input-group-append>
   </b-input-group>
   <b-container fluid>
@@ -43,8 +77,12 @@ export default {
       { value: "Public", text: "Public" },
       { value: "Private", text: "Private" },
     ],
-            Description: ''
+            Description: '',
+             dismissSecs: 3,
+    dismissCountDown: 0,
+    showDismissibleAlert: false,
         }
+        
     },
     methods:{
          addService() {
@@ -71,6 +109,12 @@ export default {
             )
 
         },
+         countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      }
     }
     
 }

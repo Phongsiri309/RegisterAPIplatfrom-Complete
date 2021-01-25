@@ -37,6 +37,10 @@ export default new Vuex.Store({
     statusD: {},
     loading: false,
     updatesection: {},
+    options: [
+      { value: "Public", text: "Public" },
+      { value: "Private", text: "Private" },
+    ],
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -91,16 +95,7 @@ export default new Vuex.Store({
       axios
         .post("https://apicontroller.herokuapp.com/service/add", payload)
         .then((res) => {
-          if (
-            res.data[0].data.message ==
-            "Service name or EntryPoint is already in use."
-          ) {
-            alert("บันทึกไม่สำเร็จ");
-          } else {
-            alert("บันทึกสำเร็จ");
-          }
-
-          context.commit("SET_ISTATUS", res);
+          context.commit("SET_ISTATUS", res.data[0]);
         });
     },
     servicelistUser({ commit }) {
@@ -118,6 +113,7 @@ export default new Vuex.Store({
     },
     serviceDelete({ commit }, payload) {
       commit("SET_DELETESTATUS", payload);
+      this.state.loading = true;
       axios
         .delete("https://apicontroller.herokuapp.com/service/delete", {
           data: {
@@ -127,18 +123,15 @@ export default new Vuex.Store({
         })
         .then((res) => {
           commit("SET_DELETESTATUS", res);
+          this.state.loading = false;
         });
     },
     Updateservice({ commit }, payload) {
       commit("SET_UPDATE", payload);
-      axios
-        .patch(
-          "https://apicontroller.herokuapp.com/service/update",
-          this.state.updatesection
-        )
-        .then((res) => {
-          console.log(res);
-        });
+      axios.patch(
+        "https://apicontroller.herokuapp.com/service/update",
+        this.state.updatesection
+      );
     },
   },
   modules: {},
