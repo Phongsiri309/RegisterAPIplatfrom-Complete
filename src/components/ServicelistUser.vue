@@ -92,13 +92,7 @@
 <script>
 export default {
     name:'ServicelistUser',
-    data(){
-      return{
-        
-        Private:'private',
-        Public: 'public'
-      }
-    },
+  
      mounted(){
       
           
@@ -133,7 +127,7 @@ export default {
         let payload = {
           service_name: service.service_name,
 api_url: service.api_url,
-permission: this.Upermission,
+permission: service.permission,
 service_id: service.service_id,
 user_id: service.user_id,
 description: service.description
