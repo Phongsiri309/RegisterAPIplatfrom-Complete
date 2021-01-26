@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :style="{ backgroundColor: `#FFF9D7` }">
     <b-container fluid class="mt-5">
       <b-row class="mt-5">
         <b-col align-self="center" class="mt-5">

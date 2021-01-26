@@ -66,7 +66,7 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  background-color: #fbfbfd;
+  background-color: #fff9d7;
   color: black;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
