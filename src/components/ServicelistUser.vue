@@ -42,7 +42,7 @@
                       width: `110px`,
                       border: `none`,
                       background: `darkred`,
-                      marginLeft: `980px`,
+                    
                       color: `white`,
                     }"
                     v-on:change="update(service)"

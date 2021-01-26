@@ -1,21 +1,21 @@
 <template>
   <div class="home">
-  
-    <service-table></service-table>
-   
-		<br />
-	
+    <b-container fluid class="mt-5">
+      <b-row class="mt-5">
+        <b-col align-self="center" class="mt-5">
+          <user-card></user-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-
-import ServiceTable from '../components/ServiceTable.vue'
+import UserCard from "../components/UserCard.vue";
 // @ is an alias to /src
 
 export default {
-  components: { ServiceTable},
-  name: 'Home',
- 
-}
+  components: { UserCard },
+  name: "Home",
+};
 </script>

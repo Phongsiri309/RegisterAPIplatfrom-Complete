@@ -3,15 +3,16 @@
 <p v-if="$store.state.user">
       <service-input></service-input>
     </p>
-    <servicelist-user></servicelist-user>
+   <my-card></my-card>
   </div>
 </template>
 
 <script>
+import MyCard from '../components/MyCard.vue'
 import ServiceInput from '../components/ServiceInput.vue'
-import ServicelistUser from '../components/ServicelistUser.vue'
+
 export default {
-  components: { ServiceInput, ServicelistUser },
+  components: { ServiceInput, MyCard },
   name:'Ownapi'
 }
 </script>
