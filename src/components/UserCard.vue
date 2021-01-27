@@ -56,7 +56,26 @@
             <b-card-title> Endpoint </b-card-title>
             <b-card-body>
               <div>URL : {{ service.api_url }}</div>
-              method : <span class="bg-success text-white"> POST</span>
+              method :
+              <span
+                v-if="(service.method = 'GET')"
+                :style="{
+                  backgroundColor: `green`,
+                  color: `white`,
+                  borderRadius: `10px 10px 10px 10px`,
+                }"
+              >
+                {{ service.method }}
+              </span>
+              <span
+                v-else
+                :style="{
+                  backgroundColor: `blue`,
+                  color: `white`,
+                  borderRadius: `10px 10px 10px 10px`,
+                }"
+                >{{ service.method }}</span
+              >
             </b-card-body>
           </b-card>
         </b-collapse>

@@ -1,18 +1,24 @@
 <template>
-  <div id="Ownapi" :style="{ backgroundColor: `#FFF9D7` }">
-    <p v-if="$store.state.user">
-      <service-input></service-input>
-    </p>
-    <my-card></my-card>
+  <div id="Ownapi" :style="{ backgroundColor: `whitesmoke` }">
+    <b-container fluid class="mt-5">
+      <b-row class="mt-5">
+        <b-col align-self="center" class="mt-5">
+          <p v-if="$store.state.user">
+            <reg-input></reg-input>
+          </p>
+          <my-card></my-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
 import MyCard from "../components/MyCard.vue";
-import ServiceInput from "../components/ServiceInput.vue";
+import RegInput from "../components/RegInput.vue";
 
 export default {
-  components: { ServiceInput, MyCard },
+  components: { MyCard, RegInput },
   name: "Ownapi",
 };
 </script>

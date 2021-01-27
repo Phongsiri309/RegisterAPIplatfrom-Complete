@@ -2,10 +2,8 @@
   <div id="Navigator">
     <b-navbar
       toggleable="lg"
-      type="dark"
-      variant="dark"
       fixed="top"
-      :style="{ height: `60px` }"
+      :style="{ height: `60px`, backgroundColor: `darkred` }"
     >
       <b-navbar-brand>API platform</b-navbar-brand>
 
@@ -60,13 +58,8 @@ export default {
 </script>
 
 <style scoped>
-.navbar.navbar-dark.bg-dark {
-  background-color: darkred !important;
-  color: white !important;
-}
-
 #nav a.router-link-exact-active {
-  background-color: #fff9d7;
+  background-color: whitesmoke;
   color: black;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;

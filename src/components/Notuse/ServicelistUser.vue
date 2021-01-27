@@ -14,7 +14,6 @@
             <template #header>
               <b-card-title>
                 <input
-                  
                   v-model="service.service_name"
                   v-on:blur="update(service)"
                   :style="{
@@ -26,39 +25,45 @@
                   ondblclick="this.readOnly='';"
                 />
                 <span v-if="service.permission == `public`">
-                
-                  <img src="@/assets/icons8_earth_planet.png" align="right" :style="{marginBottom:`15px`}" />
-                 
-                  
+                  <img
+                    src="@/assets/icons8_earth_planet.png"
+                    align="right"
+                    :style="{ marginBottom: `15px` }"
+                  />
                 </span>
                 <span v-else>
-                  <img src="@/assets/icons8_lock.png" align="right" :style="{marginBottom:`15px`}"/>
+                  <img
+                    src="@/assets/icons8_lock.png"
+                    align="right"
+                    :style="{ marginBottom: `15px` }"
+                  />
                 </span>
-              
               </b-card-title>
-              <h6 class="mb-0">Author : {{ service.gmail }}  <b-form-select
-                    v-model="service.permission"
-                    :style="{
-                      width: `110px`,
-                      border: `none`,
-                      background: `darkred`,
-                    
-                      color: `white`,
-                    }"
-                    v-on:change="update(service)"
+              <h6 class="mb-0">
+                Author : {{ service.gmail }}
+                <b-form-select
+                  v-model="service.permission"
+                  :style="{
+                    width: `110px`,
+                    border: `none`,
+                    background: `darkred`,
+
+                    color: `white`,
+                  }"
+                  v-on:change="update(service)"
+                >
+                  <b-form-select-option value="public"
+                    >Public</b-form-select-option
                   >
-                    <b-form-select-option value="public"
-                      >Public</b-form-select-option
-                    >
-                    <b-form-select-option value="private"
-                      >Private</b-form-select-option
-                    >
-                  </b-form-select></h6>
-           
+                  <b-form-select-option value="private"
+                    >Private</b-form-select-option
+                  >
+                </b-form-select>
+              </h6>
             </template>
             <b-card-text>
-              Descriptions 
-              <b-col >
+              Descriptions
+              <b-col>
                 <b-form-textarea
                   id="textarea-large"
                   size="lg"
@@ -151,12 +156,11 @@ export default {
         service_id: service.service_id,
         user_id: this.$store.state.user.user_id,
       };
-        this.$store.dispatch("serviceDelete", payload)
-      .then(setTimeout(()=>{
-this.$store.dispatch("servicelistUser")
-      },1000)
-        
-      )
+      this.$store.dispatch("serviceDelete", payload).then(
+        setTimeout(() => {
+          this.$store.dispatch("servicelistUser");
+        }, 1000)
+      );
     },
     update(service) {
       let payload = {
