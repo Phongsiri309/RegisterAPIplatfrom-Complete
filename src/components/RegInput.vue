@@ -50,7 +50,6 @@
           </b-row>
           <b-input-group v-for="(input, k) in inputs" :key="k" class="mb-3">
             <b-form-input placeholder="parameter" v-model="input.parameterN" />
-
             <b-form-select
               placeholder="type "
               v-model="input.parameterT"
@@ -143,6 +142,7 @@ export default {
         permission: this.Permission,
         user_id: this.$store.state.serviceid,
         method: this.methods,
+        paramset: this.inputs,
         desc: this.DescriptionsPU,
       };
       this.$store

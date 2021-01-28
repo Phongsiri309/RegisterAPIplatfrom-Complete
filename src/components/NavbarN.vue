@@ -1,9 +1,7 @@
 <template>
-  <div id="Navigator">
-    <b-navbar toggleable="lg" fixed="top">
-      <b-navbar-brand :style="{ color: `white` }"
-        >ABDUL Registration API platform</b-navbar-brand
-      >
+  <div id="Navbar-N">
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
       <b-navbar-nav>
         <b-nav-item to="/">WE API</b-nav-item>
         <div v-if="$store.state.user">
@@ -76,22 +74,12 @@
 <script>
 import GoogleSignIn from "./SignIn/GoogleSignIn.vue";
 export default {
-  name: "Navigator",
+  name: "Navbar-N",
   components: { GoogleSignIn },
-  mounted() {
-    setInterval(() => {
-      this.$store.state.user;
-    }, 100);
-  },
 };
 </script>
 
 <style>
-.navbar {
-  background-color: darkred;
-  height: 60px;
-}
-
 img {
   width: 30px;
   border-radius: 50%;
@@ -100,16 +88,11 @@ li {
   display: unset;
 }
 
-a.dropdown-item {
-  padding: 0;
-}
 #nav a.router-link-exact-active {
-  background-color: white;
+  background-color: whitesmoke;
   color: black;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
 
 @media only screen and (max-width: 991px) {

@@ -1,8 +1,6 @@
 <template>
   <div id="UserCard">
     <b-container
-      class="p-3 mb-1"
-      :style="{ width: `60%` }"
       v-for="(service, index) in this.$store.state.servicelist[0]"
       :key="service.id"
     >
@@ -104,4 +102,12 @@ export default {
 </script>
 
 <style>
+.container {
+  width: 60%;
+}
+@media only screen and (max-width: 420px) {
+  .container {
+    width: unset;
+  }
+}
 </style>

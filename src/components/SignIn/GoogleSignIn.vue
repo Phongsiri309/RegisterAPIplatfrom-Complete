@@ -6,10 +6,10 @@
         :logoutButton="true"
         :style="{
           border: `0`,
-          background: `red`,
-          color: `white`,
-          width: `110px`,
-          height: `30px`,
+          color: `red`,
+          backgroundColor: `rgb(0,0,0,0)`,
+          width: `200px`,
+          paddingTop: `10px`,
         }"
         >Logout</GoogleLogin
       >

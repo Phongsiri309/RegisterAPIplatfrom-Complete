@@ -2,21 +2,18 @@
   <div class="playground">
     <b-container fluid class="mt-5">
       <b-row class="mt-5">
-        <b-col align-self="center" class="mt-5">
-          <reg-input></reg-input>
-          <my-card></my-card>
-        </b-col>
+        <b-col align-self="center" class="mt-5"> </b-col>
       </b-row>
     </b-container>
+    <navbar-n></navbar-n>
   </div>
 </template>
 
 <script>
-import MyCard from "../components/MyCard.vue";
-import RegInput from "../components/RegInput.vue";
+import NavbarN from "../components/NavbarN.vue";
 export default {
   name: "playground",
-  components: { MyCard, RegInput },
+  components: { NavbarN },
 };
 </script>
 

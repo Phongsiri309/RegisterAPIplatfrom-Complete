@@ -41,6 +41,7 @@ export default new Vuex.Store({
       { value: "Public", text: "Public" },
       { value: "Private", text: "Private" },
     ],
+
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -64,6 +65,7 @@ export default new Vuex.Store({
     SET_UPDATE(state, Section) {
       state.updatesection = Section;
     },
+
   },
   actions: {
     addUser(context, payload) {
@@ -93,8 +95,9 @@ export default new Vuex.Store({
     },
     Insertservice(context, payload) {
       axios
-        .post("https://apicontroller.herokuapp.com/service/add", payload)
+        .post("https://fastapimongo.herokuapp.com/service/add-service", payload)
         .then((res) => {
+          console.log(res.data)
           context.commit("SET_ISTATUS", res.data[0]);
         });
     },

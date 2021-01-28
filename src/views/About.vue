@@ -1,7 +1,7 @@
 <template>
   <div id="Ownapi" :style="{ backgroundColor: `whitesmoke` }">
     <b-container fluid class="mt-5">
-      <b-row class="mt-5">
+      <b-row>
         <b-col align-self="center" class="mt-5">
           <p v-if="$store.state.user">
             <reg-input></reg-input>
