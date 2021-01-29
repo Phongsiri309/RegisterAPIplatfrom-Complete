@@ -43,6 +43,18 @@
             <img :src="$store.state.user.google_photo" />
             {{ $store.state.user.gmail }}</b-button
           >
+          <b-button
+            v-b-toggle.my-collapse
+            v-else
+            :style="{
+              borderColor: `darkred`,
+              backgroundColor: `rgba(0,0,0,0)`,
+              color: `Black`,
+              width: `200px`,
+            }"
+          >
+            SignIn
+          </b-button>
         </div>
 
         <b-collapse id="my-collapse">
@@ -116,6 +128,13 @@ a.dropdown-item {
   .navbar-nav {
     display: none;
   }
+  .navbar-nav .nav-link {
+    display: none;
+  }
+  button.navbar-toggler.collapsed {
+    align-self: auto;
+  }
+
   a.router-link-exact-active {
     color: white;
     background-color: darkred;
