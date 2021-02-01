@@ -63,7 +63,28 @@
                 method :
                 <span class="bg-primary text-white">{{ service.method }}</span>
               </div>
-              <div>Parameter {{ service.parameter_name }}</div>
+                <table class="table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      {{ service.param_name}}
+                    </td>
+                     <td>
+                      {{ service.param_type }}
+                    </td>
+                     <td>
+                      {{ service.desc }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </b-card-body>
           </b-card>
         </b-collapse>
