@@ -27,7 +27,7 @@
         </b-col>
       </b-row>
       <b-row align-h="start" class="ml-1 mt-3">
-        Dsecriptions
+        Descriptions
         <b-textarea v-model="Descriptions" class="ml-2 w-75"></b-textarea>
       </b-row>
       <div class="mb-3 mt-3" align="left">
@@ -41,20 +41,17 @@
 
       <b-collapse id="my-collapse">
         <b-card>
-          <b-row align-h="start" class="ml-1 mt-3">
-            Dsecriptions for Parameter usecase
-            <b-textarea
-              v-model="DescriptionsPU"
-              class="ml-2 w-75 mb-3"
-            ></b-textarea>
-          </b-row>
           <b-input-group v-for="(input, k) in inputs" :key="k" class="mb-3">
-            <b-form-input placeholder="parameter" v-model="input.parameterN" />
+            <b-form-input placeholder="parameter" v-model="input.param_name" />
             <b-form-select
               placeholder="type "
-              v-model="input.parameterT"
+              v-model="input.param_type"
               :options="Titems"
             />
+            <b-form-input
+              v-model="input.desc"
+              placeholder="Description. . ."
+            ></b-form-input>
             <b-input-group-append>
               <b-button
                 variant="outline-danger"
@@ -102,8 +99,9 @@ export default {
       ],
       inputs: [
         {
-          parameterN: "",
-          parameterT: "Int",
+          param_name: "",
+          param_type: "Int",
+          desc: "",
         },
       ],
       Titems: [
@@ -120,14 +118,13 @@ export default {
           text: "Any",
         },
       ],
-      DescriptionsPU: "",
     };
   },
   methods: {
     add() {
       this.inputs.push({
-        parameterN: "",
-        parameterT: "",
+        param_name: "",
+        param_type: "",
       });
       console.log(this.inputs);
     },
@@ -142,8 +139,7 @@ export default {
         permission: this.Permission,
         user_id: this.$store.state.serviceid,
         method: this.methods,
-        paramset: this.inputs,
-        desc: this.DescriptionsPU,
+        param_set: this.inputs,
       };
       this.$store
         .dispatch("Insertservice", payload)

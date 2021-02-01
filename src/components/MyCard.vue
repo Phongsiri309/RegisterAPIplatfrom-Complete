@@ -71,7 +71,39 @@
             <b-card-title> Endpoint </b-card-title>
             <b-card-body>
               <div>URL : {{ service.api_url }}</div>
-              method : <span class="bg-success text-white"> POST</span>
+              <div v-if="service.method === 'GET'">
+                method :
+                <span class="bg-success text-white">{{ service.method }}</span>
+              </div>
+              <div v-else>
+                method :
+                <span class="bg-primary text-white">{{ service.method }}</span>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      {{ service.param_name}}
+                    </td>
+                     <td>
+                      {{ service.param_type }}
+                    </td>
+                     <td>
+                      {{ service.desc }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                Paramerter : {{ service.param_name }}
+                Type : 
+                description : 
             </b-card-body>
           </b-card>
         </b-collapse>

@@ -71,7 +71,10 @@ export default new Vuex.Store({
     addUser(context, payload) {
       // context.commit("SET_USERLOGIN", payload);
       axios
-        .post("https://apicontroller.herokuapp.com/user/login", payload)
+        .post(
+          "https://restfulapipython.herokuapp.com/v1/APIs/user/login",
+          payload
+        )
         .then((res) => {
           var getuser = res.data[0];
           var reciveuser = getuser.data;
@@ -85,7 +88,9 @@ export default new Vuex.Store({
       };
       this.state.loading = true;
       axios
-        .get("https://apicontroller.herokuapp.com/service/list", { params })
+        .get("https://restfulapipython.herokuapp.com/v1/APIs/service/list", {
+          params,
+        })
         .then((res) => {
           var data = res.data;
 
@@ -95,9 +100,12 @@ export default new Vuex.Store({
     },
     Insertservice(context, payload) {
       axios
-        .post("https://fastapimongo.herokuapp.com/service/add-service", payload)
+        .post(
+          "https://restfulapipython.herokuapp.com/v1/APIs/service/add",
+          payload
+        )
         .then((res) => {
-          console.log(res.data)
+          console.log(res.data);
           context.commit("SET_ISTATUS", res.data[0]);
         });
     },
@@ -108,8 +116,11 @@ export default new Vuex.Store({
       };
       this.state.loading = true;
       axios
-        .get("https://apicontroller.herokuapp.com/user/service", { params })
+        .get("https://restfulapipython.herokuapp.com/v1/APIs/user/service", {
+          params,
+        })
         .then((res) => {
+          console.log(res.data);
           commit("SET_SERVIVCEUSER", res.data);
           this.state.loading = false;
         });
@@ -118,12 +129,15 @@ export default new Vuex.Store({
       commit("SET_DELETESTATUS", payload);
       this.state.loading = true;
       axios
-        .delete("https://apicontroller.herokuapp.com/service/delete", {
-          data: {
-            user_id: this.state.statusD.user_id,
-            service_id: this.state.statusD.service_id,
-          },
-        })
+        .delete(
+          "https://restfulapipython.herokuapp.com/v1/APIs/service/delete",
+          {
+            data: {
+              user_id: this.state.statusD.user_id,
+              service_id: this.state.statusD.service_id,
+            },
+          }
+        )
         .then((res) => {
           commit("SET_DELETESTATUS", res);
           this.state.loading = false;

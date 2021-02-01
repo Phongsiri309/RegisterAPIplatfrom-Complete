@@ -2,8 +2,8 @@
   <div id="Navigator">
     <b-navbar toggleable="lg" fixed="top">
       <b-navbar-brand :style="{ color: `white` }"
-        >ABDUL Registration API platform</b-navbar-brand
-      >
+        >ABDUL Registration API
+      </b-navbar-brand>
       <b-navbar-nav>
         <b-nav-item to="/">WE API</b-nav-item>
         <div v-if="$store.state.user">
