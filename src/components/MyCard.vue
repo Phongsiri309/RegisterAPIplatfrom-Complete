@@ -101,9 +101,7 @@
                   </tr>
                 </tbody>
               </table>
-                Paramerter : {{ service.param_name }}
-                Type : 
-                description : 
+              
             </b-card-body>
           </b-card>
         </b-collapse>
