@@ -48,8 +48,8 @@
       </div>
 
       <b-collapse id="my-collapse">
-        <b-card>
-          <b-input-group v-for="(input, k) in inputs" :key="k" class="mb-2">
+        <b-card v-for="(input, k) in inputs" :key="k">
+          <b-input-group  class="mb-2">
             <b-form-input placeholder="parameter" v-model="input.param_name" />
             <b-form-select
               placeholder="type "
@@ -69,16 +69,16 @@
               >
               
             </b-input-group-append>
-              <b-container class="mt-2">
-              <b-button :style="{borderRadius:`50%`}"
+             
+          </b-input-group>
+                   
+              <b-button class=" rounded-circle" 
                 variant="outline-success"
                 @click="add(k)"
                 v-show="k == inputs.length - 1"
-                ><img src="@/assets/icons8_plus_green.png" :style="{borderRadius:`50%`,height:`25px`,width:`25px`}"></b-button
+                ><img src="@/assets/icons8_plus_green.png"  ></b-button
               >
-              </b-container>
-          </b-input-group>
-                      
+           
         </b-card>
       </b-collapse>
       <b-row>
