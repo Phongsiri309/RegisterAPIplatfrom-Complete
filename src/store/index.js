@@ -2,8 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import { LoaderPlugin } from "vue-google-login";
-import Vuelidate from "vuelidate";
-Vue.use(Vuelidate);
+
+
 
 const CLIENT_ID =
   "1042372769466-ctqeoo0isdkbt1pethp8no473sejgl7h.apps.googleusercontent.com";
@@ -42,6 +42,7 @@ export default new Vuex.Store({
       { value: "Private", text: "Private" },
     ],
 
+   
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -65,7 +66,6 @@ export default new Vuex.Store({
     SET_UPDATE(state, Section) {
       state.updatesection = Section;
     },
-
   },
   actions: {
     addUser(context, payload) {

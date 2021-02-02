@@ -1,15 +1,23 @@
 <template>
   <div id="RegInput">
     <b-container>
+    
       <b-input-group class="mt-3">
         <b-form-input
           v-model="Servicename"
           placeholder="Service Name . . ."
         ></b-form-input>
         <b-form-input
-          v-model="Endpoint"
+          v-model.trim="$v.Endpoint.$model"
           placeholder="Endpoint . . ."
-        ></b-form-input>
+:class="{'is-invalid':$v.Endpoint.$error,'is-valid':!$v.Endpoint.$invalid}"
+          ></b-form-input>
+<b-form-valid-feedback >Collect</b-form-valid-feedback>
+      <b-form-invalid-feedback>
+        <span v-if="!$v.Endpoint.required">Url required</span>
+        <span v-if="!$v.Endpoint.url">http:// or https://</span>
+      </b-form-invalid-feedback>
+ 
       </b-input-group>
       <b-row class="w-auto mt-3">
         <b-col>
@@ -41,7 +49,7 @@
 
       <b-collapse id="my-collapse">
         <b-card>
-          <b-input-group v-for="(input, k) in inputs" :key="k" class="mb-3">
+          <b-input-group v-for="(input, k) in inputs" :key="k" class="mb-2">
             <b-form-input placeholder="parameter" v-model="input.param_name" />
             <b-form-select
               placeholder="type "
@@ -57,22 +65,26 @@
                 variant="outline-danger"
                 @click="remove(k)"
                 v-show="k || (!k && inputs.length > 1)"
-                >Remove</b-button
+                ><img src="@/assets/icons8_multiply.png" :style="{height:`20px`,width:`20px`}"></b-button
               >
-              <b-button
-                variant="outline-primary"
+              
+            </b-input-group-append>
+              <b-container class="mt-2">
+              <b-button :style="{borderRadius:`50%`}"
+                variant="outline-success"
                 @click="add(k)"
                 v-show="k == inputs.length - 1"
-                >Add fields</b-button
+                ><img src="@/assets/icons8_plus_green.png" :style="{borderRadius:`50%`,height:`25px`,width:`25px`}"></b-button
               >
-            </b-input-group-append>
+              </b-container>
           </b-input-group>
+                      
         </b-card>
       </b-collapse>
       <b-row>
         <b-col></b-col>
-        <b-button class="mt-3" variant="outline-success" v-on:click="addService"
-          >Create</b-button
+        <b-button  class="mt-3" variant="outline-success"
+         v-on:click="addService" >Create</b-button
         >
       </b-row>
     </b-container>
@@ -80,10 +92,15 @@
 </template>
 
 <script>
+import { required,maxLength,url} from 'vuelidate/lib/validators'
 export default {
   name: "RegInput",
+  validations:{
+    
+    Endpoint: { required, url, maxLength: maxLength(2083) }},
   data() {
     return {
+    
       Servicename: "",
       Endpoint: "",
       Descriptions: "",
@@ -121,6 +138,7 @@ export default {
     };
   },
   methods: {
+
     add() {
       this.inputs.push({
         param_name: "",
@@ -132,6 +150,8 @@ export default {
       this.inputs.splice(index, 1);
     },
     addService() {
+      this.$v.Endpoint.$touch()
+      if(this.$v.Endpoint.$error) return
       let payload = {
         service_name: this.Servicename,
         api_url: this.Endpoint,
@@ -154,6 +174,7 @@ export default {
           }, 3000)
         );
     },
+   
   },
 };
 </script>

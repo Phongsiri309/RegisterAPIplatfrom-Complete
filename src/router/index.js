@@ -7,6 +7,9 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Vuelidate from "vuelidate";
+
+Vue.use(Vuelidate);
 
 library.add(faUserSecret);
 

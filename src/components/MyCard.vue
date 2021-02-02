@@ -82,19 +82,25 @@
               <table class="table">
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Parameter</th>
                     <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr v-for="(paramname,index) in service.param_name" :key="paramname.id" >
                     <td>
-                      {{ service.param_name}}
+                        {{ index }}
                     </td>
-                     <td>
+                    <td >
+                       {{ paramname}}
+                    </td>
+                    <td >
                       {{ service.param_type }}
                     </td>
+                    
+                    
                      <td>
                       {{ service.desc }}
                     </td>
@@ -113,6 +119,7 @@
 <script>
 export default {
   name: "Mycard",
+
   mounted() {
     if (this.$store.state.user.user_id) {
       this.$store.dispatch("servicelistUser");
