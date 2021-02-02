@@ -20,7 +20,7 @@
         >
           <h1>{{ service.service_name }}</h1>
           <b-card-title
-            ><h6>Author : {{ service.gmail }}</h6></b-card-title
+            ><h6>Author : {{ service.gg }}</h6></b-card-title
           >
         </b-card-header>
         <b-card-body
@@ -82,27 +82,25 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>#</th>
+                 
                     <th>Parameter</th>
                     <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(paramname,index) in service.param_name" :key="paramname.id" >
-                    <td>
-                        {{ index }}
+                  <tr v-for="(param, index) in service.param_set" :key="`paramName-${index}`">
+                 
+                    <td >
+                       {{ param.param_name }}
                     </td>
                     <td >
-                       {{ paramname}}
-                    </td>
-                    <td >
-                      {{ service.param_type }}
+                      {{ param.param_type }}
                     </td>
                     
                     
                      <td>
-                      {{ service.desc }}
+                      {{ param.desc }}
                     </td>
                   </tr>
                 </tbody>

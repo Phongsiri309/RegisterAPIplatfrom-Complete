@@ -16,7 +16,7 @@
           <b-nav-item to="/playground">PLAYGROUND</b-nav-item>
         </div>
       </b-navbar-nav>
-      <b-navbar-toggle target="sidebar-collapse"></b-navbar-toggle>
+      <b-navbar-toggle   target="sidebar-colla" right></b-navbar-toggle>
       <b-navbar-nav class="ml-auto">
         <b-nav-form> </b-nav-form>
         <b-nav-item-dropdown right>
@@ -33,18 +33,19 @@
         </b-nav-item-dropdown>
       </b-navbar-nav>
 
-      <b-sidebar id="sidebar-collapse" is-nav right shadow>
+      <b-sidebar id="sidebar-colla" is-nav right shadow>
         <div class="mb-3">
           <b-button
+          v-b-toggle="'accordion-productdetails' + index"
             :style="{ backgroundColor: `darkred` }"
-            v-b-toggle.my-collapse
+         
             v-if="$store.state.user"
           >
             <img :src="$store.state.user.google_photo" />
             {{ $store.state.user.gmail }}</b-button
           >
           <b-button
-            v-b-toggle.my-collapse
+            v-b-toggle="'accordion-productdetails' + index" 
             v-else
             :style="{
               borderColor: `darkred`,
@@ -57,7 +58,7 @@
           </b-button>
         </div>
 
-        <b-collapse id="my-collapse">
+        <b-collapse  :id="'accordion-productdetails' + index">
           <b-card
             ><b-button variant="outline-danger" href="/"
               ><google-sign-in></google-sign-in

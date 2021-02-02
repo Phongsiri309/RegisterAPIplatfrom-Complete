@@ -72,15 +72,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr v-for="(param, index) in service.param_set" :key="`paramName-${index}`">
                     <td>
-                      {{ service.param_name}}
+                      {{ param.param_name}}
                     </td>
                      <td>
-                      {{ service.param_type }}
+                      {{ param.param_type }}
                     </td>
                      <td>
-                      {{ service.desc }}
+                      {{ param.desc }}
                     </td>
                   </tr>
                 </tbody>

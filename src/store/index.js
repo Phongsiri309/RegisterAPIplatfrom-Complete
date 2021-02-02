@@ -71,10 +71,7 @@ export default new Vuex.Store({
     addUser(context, payload) {
       // context.commit("SET_USERLOGIN", payload);
       axios
-        .post(
-          "https://restfulapipython.herokuapp.com/v1/APIs/user/login",
-          payload
-        )
+        .post("https://restfulapipython.herokuapp.com/v1/APIs/login", payload)
         .then((res) => {
           var getuser = res.data[0];
           var reciveuser = getuser.data;
@@ -88,7 +85,7 @@ export default new Vuex.Store({
       };
       this.state.loading = true;
       axios
-        .get("https://restfulapipython.herokuapp.com/v1/APIs/service/list", {
+        .get("https://restfulapipython.herokuapp.com/v1/APIs/", {
           params,
         })
         .then((res) => {
@@ -116,7 +113,7 @@ export default new Vuex.Store({
       };
       this.state.loading = true;
       axios
-        .get("https://restfulapipython.herokuapp.com/v1/APIs/user/service", {
+        .get("https://restfulapipython.herokuapp.com/v1/APIs/user", {
           params,
         })
         .then((res) => {
