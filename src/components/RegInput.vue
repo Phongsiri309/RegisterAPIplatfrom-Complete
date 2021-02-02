@@ -1,6 +1,6 @@
 <template>
-  <div id="RegInput">
-    <b-container>
+  <div id="RegInput" >
+    <b-container >
     
       <b-input-group class="mt-3">
         <b-form-input
@@ -72,7 +72,7 @@
              
           </b-input-group>
                    
-              <b-button class=" rounded-circle" 
+              <b-button  :style="{borderRadius:`30px 30px 30px 30px`}"
                 variant="outline-success"
                 @click="add(k)"
                 v-show="k == inputs.length - 1"

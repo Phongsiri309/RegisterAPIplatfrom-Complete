@@ -27,10 +27,8 @@ export default {
   color: #2c3e50;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
+  
 }
 
-#bg {
-  background-color: #fbfbfd;
-  /* background-image: linear-gradient(blueviolet,violet); */
-}
+
 </style>

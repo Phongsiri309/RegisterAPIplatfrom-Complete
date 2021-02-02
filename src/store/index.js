@@ -143,7 +143,7 @@ export default new Vuex.Store({
     Updateservice({ commit }, payload) {
       commit("SET_UPDATE", payload);
       axios.patch(
-        "https://apicontroller.herokuapp.com/service/update",
+        "https://restfulapipython.herokuapp.com/v1/APIs/service/update",
         this.state.updatesection
       );
     },

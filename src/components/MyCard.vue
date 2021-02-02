@@ -1,5 +1,5 @@
 <template>
-  <div id="Mycard">
+  <div id="Mycard" >
     <b-container
       class="p-3 mb-1"
       :style="{ width: `60%` }"
@@ -18,11 +18,39 @@
             color: `#FFF9D7`,
           }"
         >
-          <h1>{{ service.service_name }}</h1>
-          <b-card-title
-            ><h6>Author : {{ service.gg }}</h6></b-card-title
-          >
+          <span v-if="service.permission == `public`">
+            <img
+              src="@/assets/icons8_earth_planet.png"
+              align="right"
+              :style="{ marginBottom: `15px` }"
+            />
+          </span>
+          <span v-else>
+            <img
+              src="@/assets/icons8_lock.png"
+              align="right"
+              :style="{ marginBottom: `15px` }"
+            />
+          </span>
+          <h1>
+            <input
+              v-model="service.service_name"
+              v-on:blur="update(service)"
+              class="w-75"
+              :style="{
+                border: `none`,
+                background: `darkred`,
+                color: `white`,
+              }"
+              readonly
+              ondblclick="this.readOnly='';"
+            />
+          </h1>
+          <b-card-title>
+            <h6>Author : {{ service.gg }}</h6>
+          </b-card-title>
         </b-card-header>
+
         <b-card-body
           class="text-left"
           :style="{
@@ -30,7 +58,15 @@
             backgroundColor: `#E8CFBB`,
           }"
         >
-          {{ service.description }}
+          <b-form-textarea
+            id="textarea-large"
+            size="lg"
+            v-model="service.description"
+            :style="{ border: `none`, backgroundColor: `rgba(0 ,0, 0, 0)` }"
+            v-on:blur="update(service)"
+            readonly
+            ondblclick="this.readOnly='';"
+          ></b-form-textarea>
         </b-card-body>
 
         <b-row class="mt-3">
@@ -70,42 +106,125 @@
           >
             <b-card-title> Endpoint </b-card-title>
             <b-card-body>
-              <div>URL : {{ service.api_url }}</div>
+              <div>
+                URL
+                <b-form-input
+                  class="w-50"
+                  v-model="service.api_url"
+                  v-on:blur="update(service)"
+                  :style="{
+                    border: `none`,
+                    backgroundColor: `rgba(0 ,0 ,0 ,0)`,
+                  }"
+                  readonly
+                  ondblclick="this.readOnly='';"
+                ></b-form-input>
+              </div>
               <div v-if="service.method === 'GET'">
                 method :
-                <span class="bg-success text-white">{{ service.method }}</span>
+                <span class="bg-success text-white"
+                  ><b-form-select
+                    v-model="service.method"
+                    :style="{
+                      width: `80px`,
+                      border: `none`,
+                      color: `white`,
+                      background: `green`,
+                    }"
+                    v-on:change="update(service)"
+                  >
+                    <b-form-select-option value="GET">GET</b-form-select-option>
+                    <b-form-select-option value="POST"
+                      >POST</b-form-select-option
+                    >
+                  </b-form-select></span
+                >
               </div>
               <div v-else>
                 method :
-                <span class="bg-primary text-white">{{ service.method }}</span>
+                <span class="bg-primary text-white"
+                  ><b-form-select
+                    v-model="service.method"
+                    :style="{
+                      width: `80px`,
+                      border: `none`,
+                      color: `white`,
+                      background: `blue`,
+                    }"
+                    v-on:change="update(service)"
+                  >
+                    <b-form-select-option value="GET">GET</b-form-select-option>
+                    <b-form-select-option value="POST"
+                      >POST</b-form-select-option
+                    >
+                  </b-form-select></span
+                >
               </div>
-              <table class="table">
+              <table class="table mt-3">
                 <thead>
                   <tr>
-                 
                     <th>Parameter</th>
                     <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(param, index) in service.param_set" :key="`paramName-${index}`">
-                 
-                    <td >
-                       {{ param.param_name }}
+                  <tr
+                    v-for="(param, index) in service.param_set"
+                    :key="`paramName-${index}`"
+                  >
+                    <td>
+                      <input
+                        v-model="param.param_name"
+                        v-on:blur="update(service)"
+                        :style="{
+                          border: `none`,
+                          backgroundColor: `rgba(0,0,0,0)`,
+                          color: `black`,
+                        }"
+                        readonly
+                        ondblclick="this.readOnly='';"
+                      />
                     </td>
-                    <td >
-                      {{ param.param_type }}
+                    <td>
+                      <b-form-select
+                        v-model="param.param_type"
+                        :style="{
+                          width: `80px`,
+                          border: `none`,
+                          color: `black`,
+                          backgroundColor: `rgba(0,0,0,0)`,
+                        }"
+                        v-on:change="update(service)"
+                      >
+                        <b-form-select-option value="str"
+                          >Str</b-form-select-option
+                        >
+                        <b-form-select-option value="int"
+                          >Int</b-form-select-option
+                        >
+                        <b-form-select-option value="any"
+                          >any</b-form-select-option
+                        >
+                      </b-form-select>
                     </td>
-                    
-                    
-                     <td>
-                      {{ param.desc }}
+
+                    <td>
+                      <input
+                        v-model="param.desc"
+                        v-on:blur="update(service)"
+                        :style="{
+                          border: `none`,
+                          backgroundColor: `rgba(0,0,0,0)`,
+                          color: `black`,
+                        }"
+                        readonly
+                        ondblclick="this.readOnly='';"
+                      />
                     </td>
                   </tr>
                 </tbody>
               </table>
-              
             </b-card-body>
           </b-card>
         </b-collapse>
@@ -148,6 +267,9 @@ export default {
         service_id: service.service_id,
         user_id: this.$store.state.user.user_id,
         description: service.description,
+        method: service.method,
+        param_set: service.param_set
+
       };
       this.$store.dispatch("Updateservice", payload);
     },
@@ -156,4 +278,5 @@ export default {
 </script>
 
 <style>
+
 </style>

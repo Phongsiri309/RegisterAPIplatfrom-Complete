@@ -1,6 +1,6 @@
 <template>
-  <div id="UserCard">
-    <b-container
+  <div id="UserCard" >
+    <b-container 
       v-for="(service, index) in this.$store.state.servicelist[0]"
       :key="service.id"
     >
@@ -33,9 +33,9 @@
 
         <b-row>
           <b-col class="text-left mt-3">
-            <b-button
+            <b-button 
               v-b-toggle="'accordion-productdetails' + index"
-              class="b-skeleton-animate-throb"
+              class="b-skeleton-animate-throb "
               :style="{ background: `rgba(0 ,0 ,0 ,0)`, borderColor: `white` }"
               >Detail
             </b-button>
@@ -113,6 +113,7 @@ export default {
 </script>
 
 <style>
+
 .container {
   width: 60%;
 }
