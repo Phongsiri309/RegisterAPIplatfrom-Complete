@@ -105,7 +105,7 @@ export default new Vuex.Store({
           payload
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           context.commit("SET_ISTATUS", res.data[0]);
         });
     },
@@ -120,7 +120,7 @@ export default new Vuex.Store({
           params,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           commit("SET_SERVIVCEUSER", res.data);
           this.state.loading = false;
         });
