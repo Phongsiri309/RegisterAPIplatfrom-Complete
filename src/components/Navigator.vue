@@ -12,7 +12,7 @@
         <div v-if="$store.state.user.status == 'superuser'">
           <b-nav-item to="/Admin">Super User</b-nav-item>
         </div>
-        <div v-if="$store.state.user.gmail == 'phongsiri.pueng@gmail.com'">
+        <div v-if="$store.state.user.ff == 'phongsiri.pueng@gmail.com'">
           <b-nav-item to="/playground">PLAYGROUND</b-nav-item>
         </div>
       </b-navbar-nav>
@@ -22,8 +22,8 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template #button-content v-if="$store.state.user">
-            <img :src="$store.state.user.google_photo" />
-            {{ $store.state.user.gmail }}
+            <img :src="$store.state.user.fo" />
+            {{ $store.state.user.ff }}
           </template>
           <template #button-content v-else> SignIn </template>
           <b-dropdown-item href="/">
@@ -41,8 +41,8 @@
          
             v-if="$store.state.user"
           >
-            <img :src="$store.state.user.google_photo" />
-            {{ $store.state.user.gmail }}</b-button
+            <img :src="$store.state.user.fo" />
+            {{ $store.state.user.ff }}</b-button
           >
           <b-button
             v-b-toggle="'accordion-productdetails' + index" 

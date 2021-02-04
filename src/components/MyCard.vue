@@ -18,7 +18,7 @@
             color: `#FFF9D7`,
           }"
         >
-          <span v-if="service.permission == `public`">
+          <span v-if="service.od == `public`">
             <img
               src="@/assets/icons8_earth_planet.png"
               align="right"
@@ -34,7 +34,7 @@
           </span>
           <h1>
             <input
-              v-model="service.service_name"
+              v-model="service.am"
               v-on:blur="update(service)"
               class="w-75"
               :style="{
@@ -47,7 +47,7 @@
             />
           </h1>
           <b-card-title>
-            <h6>Author : {{ service.gg }}</h6>
+            <h6>Author : {{ service.fh }}</h6>
           </b-card-title>
         </b-card-header>
 
@@ -61,7 +61,7 @@
           <b-form-textarea
             id="textarea-large"
             size="lg"
-            v-model="service.description"
+            v-model="service.sy"
             :style="{ border: `none`, backgroundColor: `rgba(0 ,0, 0, 0)` }"
             v-on:blur="update(service)"
             readonly
@@ -107,10 +107,12 @@
             <b-card-title> Endpoint </b-card-title>
             <b-card-body>
               <div>
-                URL
+                URL 
+                <b-row>
+                  <b-spinner type="grow" variant="danger"></b-spinner>
                 <b-form-input
                   class="w-50"
-                  v-model="service.api_url"
+                  v-model="service.wo"
                   v-on:blur="update(service)"
                   :style="{
                     border: `none`,
@@ -119,12 +121,14 @@
                   readonly
                   ondblclick="this.readOnly='';"
                 ></b-form-input>
+                
+                </b-row>
               </div>
-              <div v-if="service.method === 'GET'">
+              <div v-if="service.ny === 'GET'">
                 method :
                 <span class="bg-success text-white"
                   ><b-form-select
-                    v-model="service.method"
+                    v-model="service.ny"
                     :style="{
                       width: `80px`,
                       border: `none`,
@@ -144,7 +148,7 @@
                 method :
                 <span class="bg-primary text-white"
                   ><b-form-select
-                    v-model="service.method"
+                    v-model="service.ny"
                     :style="{
                       width: `80px`,
                       border: `none`,
@@ -170,12 +174,12 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(param, index) in service.param_set"
+                    v-for="(param, index) in service.oa"
                     :key="`paramName-${index}`"
                   >
                     <td>
                       <input
-                        v-model="param.param_name"
+                        v-model="param.om"
                         v-on:blur="update(service)"
                         :style="{
                           border: `none`,
@@ -188,7 +192,7 @@
                     </td>
                     <td>
                       <b-form-select
-                        v-model="param.param_type"
+                        v-model="param.oy"
                         :style="{
                           width: `80px`,
                           border: `none`,
@@ -211,7 +215,7 @@
 
                     <td>
                       <input
-                        v-model="param.desc"
+                        v-model="param.sv"
                         v-on:blur="update(service)"
                         :style="{
                           border: `none`,
@@ -238,7 +242,7 @@ export default {
   name: "Mycard",
 
   mounted() {
-    if (this.$store.state.user.user_id) {
+    if (this.$store.state.user.yo) {
       this.$store.dispatch("servicelistUser");
     } else {
       setTimeout(() => {
@@ -250,8 +254,8 @@ export default {
   methods: {
     deleteitem(service) {
       let payload = {
-        service_id: service.service_id,
-        user_id: this.$store.state.user.user_id,
+        sid: service.ao,
+        u: this.$store.state.user.yo,
       };
       this.$store.dispatch("serviceDelete", payload).then(
         setTimeout(() => {
@@ -265,7 +269,7 @@ export default {
         api_url: service.api_url,
         permission: service.permission,
         service_id: service.service_id,
-        user_id: this.$store.state.user.user_id,
+        user_id: this.$store.state.user.yo,
         description: service.description,
         method: service.method,
         param_set: service.param_set

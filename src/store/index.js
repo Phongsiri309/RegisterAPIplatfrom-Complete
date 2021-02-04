@@ -41,7 +41,7 @@ export default new Vuex.Store({
       { value: "Public", text: "Public" },
       { value: "Private", text: "Private" },
     ],
-
+    sessionD:{}
    
   },
   mutations: {
@@ -66,6 +66,9 @@ export default new Vuex.Store({
     SET_UPDATE(state, Section) {
       state.updatesection = Section;
     },
+    SET_SESSIOND(state, session) {
+      state.sessionD = session
+    }
   },
   actions: {
     addUser(context, payload) {
@@ -109,7 +112,7 @@ export default new Vuex.Store({
     servicelistUser({ commit }) {
       let params = {
         page: this.state.currentPage,
-        user_id: this.state.user.user_id,
+        user_id: this.state.user.yo,
       };
       this.state.loading = true;
       axios
@@ -123,15 +126,15 @@ export default new Vuex.Store({
         });
     },
     serviceDelete({ commit }, payload) {
-      commit("SET_DELETESTATUS", payload);
+      commit('SET_SESSIOND',payload)
       this.state.loading = true;
       axios
         .delete(
           "https://restfulapipython.herokuapp.com/v1/APIs/service/delete",
           {
             data: {
-              user_id: this.state.statusD.user_id,
-              service_id: this.state.statusD.service_id,
+              sid: this.state.sessionD.sid,
+              u: this.state.sessionD.u
             },
           }
         )

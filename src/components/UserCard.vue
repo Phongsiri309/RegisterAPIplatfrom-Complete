@@ -16,9 +16,9 @@
             color: `#FFF9D7`,
           }"
         >
-          <h1>{{ service.service_name }}</h1>
+          <h1>{{ service.am }}</h1>
           <b-card-title
-            ><h6>Author : {{ service.gmail }}</h6></b-card-title
+            ><h6>Author : {{ service.fh }}</h6></b-card-title
           >
         </b-card-header>
         <b-card-body
@@ -28,7 +28,7 @@
             backgroundColor: `#E8CFBB`,
           }"
         >
-          {{ service.description }}
+          {{ service.sy }}
         </b-card-body>
 
         <b-row>
@@ -53,15 +53,15 @@
           >
             <b-card-title> Endpoint </b-card-title>
             <b-card-body>
-              <div>URL : {{ service.api_url }}</div>
+              <div>URL : {{ service.wo }} <b-spinner type="grow" variant="danger" class="ml-3"></b-spinner></div>
 
-              <div v-if="service.method === 'GET'">
+              <div v-if="service.ny === 'GET'">
                 method :
-                <span class="bg-success text-white">{{ service.method }}</span>
+                <span class="bg-success text-white">{{ service.ny }}</span>
               </div>
               <div v-else>
                 method :
-                <span class="bg-primary text-white">{{ service.method }}</span>
+                <span class="bg-primary text-white">{{ service.ny }}</span>
               </div>
                 <table class="table">
                 <thead>
@@ -72,15 +72,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(param, index) in service.param_set" :key="`paramName-${index}`">
+                  <tr v-for="(param, index) in service.oa" :key="`paramName-${index}`">
                     <td>
-                      {{ param.param_name}}
+                      {{ param.om}}
                     </td>
                      <td>
-                      {{ param.param_type }}
+                      {{ param.oy }}
                     </td>
                      <td>
-                      {{ param.desc }}
+                      {{ param.sv }}
                     </td>
                   </tr>
                 </tbody>

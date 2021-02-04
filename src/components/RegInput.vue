@@ -50,10 +50,10 @@
       <b-collapse id="my-collapse">
         <b-card v-for="(input, k) in inputs" :key="k">
           <b-input-group  class="mb-2">
-            <b-form-input placeholder="parameter" v-model="input.param_name" />
+            <b-form-input placeholder="Name . . ." v-model="input.paramN" />
             <b-form-select
               placeholder="type "
-              v-model="input.param_type"
+              v-model="input.paramT"
               :options="Titems"
             />
             <b-form-input
@@ -116,8 +116,8 @@ export default {
       ],
       inputs: [
         {
-          param_name: "",
-          param_type: "Int",
+          paramN: "",
+          paramT: "Int",
           desc: "",
         },
       ],
@@ -141,8 +141,8 @@ export default {
 
     add() {
       this.inputs.push({
-        param_name: "",
-        param_type: "",
+        paramN: "",
+        paramT: "",
       });
       console.log(this.inputs);
     },
@@ -153,13 +153,13 @@ export default {
       this.$v.Endpoint.$touch()
       if(this.$v.Endpoint.$error) return
       let payload = {
-        service_name: this.Servicename,
-        api_url: this.Endpoint,
-        description: this.Descriptions,
-        permission: this.Permission,
-        user_id: this.$store.state.serviceid,
-        method: this.methods,
-        param_set: this.inputs,
+        sname: this.Servicename,
+        endpoint: this.Endpoint,
+        desc: this.Descriptions,
+        permiss: this.Permission,
+        user: this.$store.state.user.yo,
+        methods: this.methods,
+        parameter: this.inputs,
       };
       this.$store
         .dispatch("Insertservice", payload)
