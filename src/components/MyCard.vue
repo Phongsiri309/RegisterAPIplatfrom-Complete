@@ -265,14 +265,14 @@ export default {
     },
     update(service) {
       let payload = {
-        service_name: service.service_name,
-        api_url: service.api_url,
-        permission: service.permission,
-        service_id: service.service_id,
-        user_id: this.$store.state.user.yo,
-        description: service.description,
-        method: service.method,
-        param_set: service.param_set
+        sname: service.am,
+        endpoint: service.wo,
+        permiss: service.od,
+        sid: service.ao,
+        u: this.$store.state.user.yo,
+        desc: service.sy,
+        methods: service.ny,
+        parameter: service.oa
 
       };
       this.$store.dispatch("Updateservice", payload);
