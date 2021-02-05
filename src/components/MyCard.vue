@@ -79,8 +79,6 @@
             </b-button>
           </b-col>
           <b-col class="text-right">
-            
-
             <b-button
               :style="{
                 background: `rgba(0 ,0 ,0 ,0)`,
@@ -119,31 +117,42 @@
                   class="d-inline-block"
                   @hidden="onHidden"
                 >
-                  <b-button :id="index" v-if="$store.state.urlval.status == 'valid' && $store.state.urlval.sid == service.ao"
+                  <b-button
+                    :id="index"
+                    v-if="
+                      $store.state.urlval.status == 'valid' &&
+                        $store.state.urlval.sid == service.ao
+                    "
                     variant="outline-success"
                     :disabled="busy"
-                    v-on:click="checkurl(service,key)"
+                    v-on:click="checkurl(service, key)"
                   >
                     Connected
                   </b-button>
-                  <b-button :id="index" v-else-if="$store.state.urlval.status == 'invalid' && $store.state.urlval.sid == service.ao"
+                  <b-button
+                    :id="index"
+                    v-else-if="
+                      $store.state.urlval.status == 'invalid' &&
+                        $store.state.urlval.sid == service.ao
+                    "
                     variant="outline-danger"
                     :disabled="busy"
-                    v-on:click="checkurl(service,key)"
+                    v-on:click="checkurl(service, key)"
                   >
                     Failed
                   </b-button>
-                  <b-button :id="index" v-else
+                  <b-button
+                    :id="index"
+                    v-else
                     variant="outline-primary"
                     :disabled="busy"
-                    v-on:click="checkurl(service,key)"
+                    v-on:click="checkurl(service, key)"
                   >
                     Test Connections
                   </b-button>
                 </b-overlay>
 
                 <b-row>
-        
                   <b-form-input
                     class="w-50"
                     v-model="service.wo"
@@ -297,7 +306,7 @@ export default {
         sid: service.ao,
         u: this.$store.state.user.yo,
       };
-      console.log(payload)
+      console.log(payload);
       this.$store.dispatch("serviceDelete", payload).then(
         setTimeout(() => {
           this.$store.dispatch("servicelistUser");
@@ -318,16 +327,14 @@ export default {
       this.$store.dispatch("Updateservice", payload);
     },
     checkurl(service) {
-        this.busy = true
+      this.busy = true;
 
       let payload = {
         url: service.wo,
-        sid: service.ao
+        sid: service.ao,
       };
-      
+
       this.$store.dispatch("Uralvalidate", payload).then(
-        
-        
         this.setTimeout(() => {
           this.busy = false;
         })
@@ -344,7 +351,6 @@ export default {
       this.timeout = setTimeout(() => {
         this.clearTimeout();
         callback();
-        
       }, 1000);
     },
     onHidden() {
