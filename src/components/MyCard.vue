@@ -119,22 +119,31 @@
                   class="d-inline-block"
                   @hidden="onHidden"
                 >
-                  <b-button
+                  <b-button :id="index" v-if="$store.state.urlval.status == 'valid' && $store.state.urlval.sid == service.ao"
+                    variant="outline-success"
+                    :disabled="busy"
+                    v-on:click="checkurl(service,key)"
+                  >
+                    Connected
+                  </b-button>
+                  <b-button :id="index" v-else-if="$store.state.urlval.status == 'invalid' && $store.state.urlval.sid == service.ao"
+                    variant="outline-danger"
+                    :disabled="busy"
+                    v-on:click="checkurl(service,key)"
+                  >
+                    Failed
+                  </b-button>
+                  <b-button :id="index" v-else
                     variant="outline-primary"
                     :disabled="busy"
-                    v-on:click="checkurl(service)"
-                    >Test Connection</b-button
+                    v-on:click="checkurl(service,key)"
                   >
+                    Test Connections
+                  </b-button>
                 </b-overlay>
 
                 <b-row>
-                  <span v-if="$store.state.urlval.status == 'valid'"
-                    ><b-spinner type="grow" variant="success"></b-spinner>
-                  </span>
-                  <span v-else-if="$store.state.urlval.status == 'invalid'">
-                    <b-spinner type="grow" variant="danger"></b-spinner>
-                  </span>
-                  <span v-else> </span>
+        
                   <b-form-input
                     class="w-50"
                     v-model="service.wo"
@@ -309,11 +318,16 @@ export default {
       this.$store.dispatch("Updateservice", payload);
     },
     checkurl(service) {
-      this.busy = true;
+        this.busy = true
+
       let payload = {
         url: service.wo,
+        sid: service.ao
       };
+      
       this.$store.dispatch("Uralvalidate", payload).then(
+        
+        
         this.setTimeout(() => {
           this.busy = false;
         })
@@ -330,7 +344,8 @@ export default {
       this.timeout = setTimeout(() => {
         this.clearTimeout();
         callback();
-      }, 5000);
+        
+      }, 1000);
     },
     onHidden() {
       // Return focus to the button once hidden

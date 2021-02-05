@@ -180,7 +180,8 @@ export default {
       this.timeout = setTimeout(() => {
         this.clearTimeout();
         callback();
-      }, 5000);
+        
+      }, 1000);
     },
     onHidden() {
       // Return focus to the button once hidden
