@@ -83,9 +83,11 @@
       </b-collapse>
       <b-row>
         <b-col></b-col>
+
         <b-button  class="mt-3" variant="outline-success"
          v-on:click="addService" >Create</b-button
         >
+        
       </b-row>
     </b-container>
   </div>
@@ -100,7 +102,7 @@ export default {
     Endpoint: { required, url, maxLength: maxLength(2083) }},
   data() {
     return {
-    
+     
       Servicename: "",
       Endpoint: "",
       Descriptions: "",
@@ -144,14 +146,17 @@ export default {
         paramN: "",
         paramT: "",
       });
-      console.log(this.inputs);
+      // console.log(this.inputs);
     },
     remove(index) {
       this.inputs.splice(index, 1);
     },
     addService() {
+    
       this.$v.Endpoint.$touch()
       if(this.$v.Endpoint.$error) return
+
+       
       let payload = {
         sname: this.Servicename,
         endpoint: this.Endpoint,
@@ -174,6 +179,7 @@ export default {
           }, 3000)
         );
     },
+    
    
   },
 };

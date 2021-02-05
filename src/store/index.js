@@ -41,7 +41,9 @@ export default new Vuex.Store({
       { value: "Public", text: "Public" },
       { value: "Private", text: "Private" },
     ],
-    sessionD:{}
+    sessionD: {},
+    urlval: {},
+  
    
   },
   mutations: {
@@ -68,7 +70,10 @@ export default new Vuex.Store({
     },
     SET_SESSIOND(state, session) {
       state.sessionD = session
-    }
+    },
+    SET_URLVAL(state, validator) {
+      state.urlval = validator
+    },
   },
   actions: {
     addUser(context, payload) {
@@ -150,6 +155,14 @@ export default new Vuex.Store({
         this.state.updatesection
       );
     },
+    Uralvalidate({ commit },payload) {
+      axios
+        .post("https://restfulapipython.herokuapp.com/v1/APIs/urlval", payload)
+        .then((res) => {
+          commit("SET_URLVAL", res.data[1]);
+        })
+        
+    }
   },
   modules: {},
 });

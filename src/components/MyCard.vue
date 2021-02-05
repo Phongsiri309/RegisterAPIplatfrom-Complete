@@ -1,5 +1,5 @@
 <template>
-  <div id="Mycard" >
+  <div id="Mycard">
     <b-container
       class="p-3 mb-1"
       :style="{ width: `60%` }"
@@ -79,6 +79,8 @@
             </b-button>
           </b-col>
           <b-col class="text-right">
+            
+
             <b-button
               :style="{
                 background: `rgba(0 ,0 ,0 ,0)`,
@@ -107,21 +109,43 @@
             <b-card-title> Endpoint </b-card-title>
             <b-card-body>
               <div>
-                URL 
+                URL
+                <b-overlay
+                  :show="busy"
+                  rounded
+                  opacity="0.6"
+                  spinner-small
+                  spinner-variant="primary"
+                  class="d-inline-block"
+                  @hidden="onHidden"
+                >
+                  <b-button
+                    variant="outline-primary"
+                    :disabled="busy"
+                    v-on:click="checkurl(service)"
+                    >Test Connection</b-button
+                  >
+                </b-overlay>
+
                 <b-row>
-                  <b-spinner type="grow" variant="danger"></b-spinner>
-                <b-form-input
-                  class="w-50"
-                  v-model="service.wo"
-                  v-on:blur="update(service)"
-                  :style="{
-                    border: `none`,
-                    backgroundColor: `rgba(0 ,0 ,0 ,0)`,
-                  }"
-                  readonly
-                  ondblclick="this.readOnly='';"
-                ></b-form-input>
-                
+                  <span v-if="$store.state.urlval.status == 'valid'"
+                    ><b-spinner type="grow" variant="success"></b-spinner>
+                  </span>
+                  <span v-else-if="$store.state.urlval.status == 'invalid'">
+                    <b-spinner type="grow" variant="danger"></b-spinner>
+                  </span>
+                  <span v-else> </span>
+                  <b-form-input
+                    class="w-50"
+                    v-model="service.wo"
+                    v-on:blur="update(service)"
+                    :style="{
+                      border: `none`,
+                      backgroundColor: `rgba(0 ,0 ,0 ,0)`,
+                    }"
+                    readonly
+                    ondblclick="this.readOnly='';"
+                  ></b-form-input>
                 </b-row>
               </div>
               <div v-if="service.ny === 'GET'">
@@ -240,6 +264,13 @@
 <script>
 export default {
   name: "Mycard",
+  data() {
+    return {
+      busy: false,
+
+      timeout: null,
+    };
+  },
 
   mounted() {
     if (this.$store.state.user.yo) {
@@ -257,6 +288,7 @@ export default {
         sid: service.ao,
         u: this.$store.state.user.yo,
       };
+      console.log(payload)
       this.$store.dispatch("serviceDelete", payload).then(
         setTimeout(() => {
           this.$store.dispatch("servicelistUser");
@@ -272,15 +304,40 @@ export default {
         u: this.$store.state.user.yo,
         desc: service.sy,
         methods: service.ny,
-        parameter: service.oa
-
+        parameter: service.oa,
       };
       this.$store.dispatch("Updateservice", payload);
+    },
+    checkurl(service) {
+      this.busy = true;
+      let payload = {
+        url: service.wo,
+      };
+      this.$store.dispatch("Uralvalidate", payload).then(
+        this.setTimeout(() => {
+          this.busy = false;
+        })
+      );
+    },
+    clearTimeout() {
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+        this.timeout = null;
+      }
+    },
+    setTimeout(callback) {
+      this.clearTimeout();
+      this.timeout = setTimeout(() => {
+        this.clearTimeout();
+        callback();
+      }, 5000);
+    },
+    onHidden() {
+      // Return focus to the button once hidden
+      this.$refs.button.focus();
     },
   },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
