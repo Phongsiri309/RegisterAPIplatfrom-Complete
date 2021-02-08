@@ -1,5 +1,17 @@
 <template>
   <div id="Mycard">
+     <b-container>
+      <b-row align-h="end">
+        <h4 class="pr-3">Sort By</h4>
+        <b-form-select
+          v-on:change="sortFilter"
+          class="w-25 mb-3"
+          v-model="Filter"
+          :options="Foptions"
+        >
+        </b-form-select>
+      </b-row>
+    </b-container>
     <b-container
       class="p-3 mb-1"
       :style="{ width: `60%` }"
@@ -276,6 +288,16 @@
         </b-collapse>
       </b-card>
     </b-container>
+     <b-container>
+      <b-row align-h="end">
+        <b-pagination
+          v-model="currentPage"
+          pills
+          :per-page="perPage"
+          :total-rows="$store.state.servicelistUser[1].total"
+        ></b-pagination>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -287,15 +309,27 @@ export default {
       busy: false,
 
       timeout: null,
+         Filter: -1,
+    Foptions: [
+      { value: -1, text: "Date(Lastest)" },
+      { value: 1, text: "Date(Oldest)" },
+    ],
+    currentPage: 1,
+    perPage: 10
     };
   },
 
   mounted() {
+      let params = {
+        page: this.currentPage,
+        user_id: this.$store.state.user.yo,
+        sort: this.Filter
+      };
     if (this.$store.state.user.yo) {
-      this.$store.dispatch("servicelistUser");
+      this.$store.dispatch("servicelistUser",params);
     } else {
       setTimeout(() => {
-        this.$store.dispatch("servicelistUser");
+        this.$store.dispatch("servicelistUser",params);
       }, 3000);
     }
   },
@@ -357,7 +391,19 @@ export default {
       // Return focus to the button once hidden
       this.$refs.button.focus();
     },
+    
   },
+   watch: {
+    currentPage: function (val){
+      let params = {
+        page: this.currentPage,
+        sort: this.Filter
+      };
+    if(val > 0){
+      this.$store.dispatch("servicelist", params);
+    }
+    }
+  }
 };
 </script>
 

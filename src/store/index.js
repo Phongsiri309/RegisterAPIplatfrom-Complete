@@ -32,8 +32,6 @@ export default new Vuex.Store({
     serviceid: "",
     Insertstatus: [],
     servicelistUser: [],
-    currentPage: 1,
-    perPage: 10,
     statusD: {},
     loading: false,
     updatesection: {},
@@ -44,7 +42,6 @@ export default new Vuex.Store({
     sessionD: {},
     urlval: {},
   
-   
   },
   mutations: {
     SET_USERLOGIN(state, Profile) {
@@ -69,10 +66,10 @@ export default new Vuex.Store({
       state.updatesection = Section;
     },
     SET_SESSIOND(state, session) {
-      state.sessionD = session
+      state.sessionD = session;
     },
     SET_URLVAL(state, validator) {
-      state.urlval = validator
+      state.urlval = validator;
     },
   },
   actions: {
@@ -87,10 +84,8 @@ export default new Vuex.Store({
           context.commit("SET_SID", reciveuser.user_id);
         });
     },
-    servicelist({ commit }) {
-      let params = {
-        page: this.state.currentPage,
-      };
+    servicelist({ commit },params) {
+     
       this.state.loading = true;
       axios
         .get("https://restfulapipython.herokuapp.com/v1/APIs/", {
@@ -114,11 +109,8 @@ export default new Vuex.Store({
           context.commit("SET_ISTATUS", res.data[0]);
         });
     },
-    servicelistUser({ commit }) {
-      let params = {
-        page: this.state.currentPage,
-        user_id: this.state.user.yo,
-      };
+    servicelistUser({ commit }, params) {
+
       this.state.loading = true;
       axios
         .get("https://restfulapipython.herokuapp.com/v1/APIs/user", {
@@ -131,7 +123,7 @@ export default new Vuex.Store({
         });
     },
     serviceDelete({ commit }, payload) {
-      commit('SET_SESSIOND',payload)
+      commit("SET_SESSIOND", payload);
       this.state.loading = true;
       axios
         .delete(
@@ -139,7 +131,7 @@ export default new Vuex.Store({
           {
             data: {
               sid: this.state.sessionD.sid,
-              u: this.state.sessionD.u
+              u: this.state.sessionD.u,
             },
           }
         )
@@ -155,14 +147,13 @@ export default new Vuex.Store({
         this.state.updatesection
       );
     },
-    Uralvalidate({ commit },payload) {
+    Uralvalidate({ commit }, payload) {
       axios
         .post("https://restfulapipython.herokuapp.com/v1/APIs/urlval", payload)
         .then((res) => {
           commit("SET_URLVAL", res.data[1]);
-        })
-        
-    }
+        });
+    },
   },
   modules: {},
 });

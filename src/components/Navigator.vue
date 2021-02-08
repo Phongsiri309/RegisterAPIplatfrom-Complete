@@ -1,10 +1,10 @@
 <template>
   <div id="Navigator">
-    <b-navbar toggleable="lg" fixed="top">
+    <b-navbar toggleable="lg" fixed="top" >
       <b-navbar-brand :style="{ color: `white` }"
         >ABDUL Registration API
       </b-navbar-brand>
-      <b-navbar-nav>
+      <b-navbar-nav  >
         <b-nav-item to="/">WE API</b-nav-item>
         <div v-if="$store.state.user">
           <b-nav-item to="/myapi">MY API</b-nav-item>
@@ -19,9 +19,9 @@
       <b-navbar-toggle   target="sidebar-colla" right></b-navbar-toggle>
       <b-navbar-nav class="ml-auto">
         <b-nav-form> </b-nav-form>
-        <b-nav-item-dropdown right>
+        <b-nav-item-dropdown right >
           <!-- Using 'button-content' slot -->
-          <template #button-content v-if="$store.state.user">
+          <template #button-content v-if="$store.state.user" >
             <img :src="$store.state.user.fo" />
             {{ $store.state.user.ff }}
           </template>
@@ -101,7 +101,7 @@ export default {
 
 <style>
 .navbar {
-  background-color: darkred;
+  background-color: maroon;
   height: 60px;
 }
 
