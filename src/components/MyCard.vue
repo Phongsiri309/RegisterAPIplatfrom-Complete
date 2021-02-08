@@ -336,6 +336,11 @@ export default {
 
   methods: {
     deleteitem(service) {
+      let params ={ 
+        sort: this.Filter,
+        page: this.currentPage,
+        user_id: this.$store.state.user.yo
+      }
       let payload = {
         sid: service.ao,
         u: this.$store.state.user.yo,
@@ -343,7 +348,7 @@ export default {
       console.log(payload);
       this.$store.dispatch("serviceDelete", payload).then(
         setTimeout(() => {
-          this.$store.dispatch("servicelistUser");
+          this.$store.dispatch("servicelistUser",params);
         }, 1000)
       );
     },

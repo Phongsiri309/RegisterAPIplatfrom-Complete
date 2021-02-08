@@ -137,6 +137,8 @@ export default {
           text: "Any",
         },
       ],
+      currentPage: 1,
+      Filter: -1
     };
   },
   methods: {
@@ -155,7 +157,11 @@ export default {
     
       this.$v.Endpoint.$touch()
       if(this.$v.Endpoint.$error) return
-
+      let params = {
+        page: this.currentPage,
+        sort: this.Filter,
+        user_id: this.$store.state.user.yo
+      };
        
       let payload = {
         sname: this.Servicename,
@@ -170,14 +176,14 @@ export default {
         .dispatch("Insertservice", payload)
         .then(
           setTimeout(() => {
-            this.$store.dispatch("servicelistUser");
+            this.$store.dispatch("servicelistUser",params);
           }, 3000)
         )
-        .then(
-          setTimeout(() => {
-            (this.Sname = ""), (this.Sentry = ""), (this.Description = "");
-          }, 3000)
-        );
+        // .then(
+        //   setTimeout(() => {
+        //     (this.Sname = ""), (this.Sentry = ""), (this.Description = "");
+        //   }, 3000)
+        // );
     },
     
    
