@@ -41,6 +41,9 @@ export default new Vuex.Store({
     ],
     sessionD: {},
     urlval: {},
+    superuserlist: [],
+    superDelete: {},
+    superUpdate: {}
   
   },
   mutations: {
@@ -71,6 +74,15 @@ export default new Vuex.Store({
     SET_URLVAL(state, validator) {
       state.urlval = validator;
     },
+    SET_SUPERLIST(state, superlist) {
+      state.superuserlist = superlist
+    },
+    SET_SUPERDELETE(state, deletesession) {
+      state.superDelete = deletesession
+    },
+    SET_SUPERUPDATE(state, updates) {
+      state.superUpdate = updates
+    }
   },
   actions: {
     addUser(context, payload) {
@@ -154,6 +166,34 @@ export default new Vuex.Store({
           commit("SET_URLVAL", res.data[1]);
         });
     },
+    Superlist({ commit }, params) {
+      axios
+        .get("https://restfulapipython.herokuapp.com/v1/APIs/admins", {params})
+        .then((res) => {
+          console.log(res.data)
+          commit("SET_SUPERLIST", res.data[0]);
+        });
+    },
+    SuperDelete({ commit }, payload) {
+      commit("SET_SUPERDELETE",payload);
+      axios.delete(
+        "https://restfulapipython.herokuapp.com/v1/APIs/admins/service/delete",
+        {
+          data: {
+            sid: this.state.superDelete.sid,
+              status: this.state.superDelete.status,
+            u: this.state.superDelete.u,
+          }
+        }
+      );
+    },
+    SuperUpdate({ commit }, payload) {
+      commit("SET_SUPERUPDATE", payload);
+      axios.patch(
+        "https://restfulapipython.herokuapp.com/v1/APIs/admins/service/update"
+        ,
+      this.state.superUpdate);
+    }
   },
   modules: {},
 });

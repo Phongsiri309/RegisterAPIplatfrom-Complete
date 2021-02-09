@@ -9,8 +9,8 @@
         <div v-if="$store.state.user">
           <b-nav-item to="/myapi">MY API</b-nav-item>
         </div>
-        <div v-if="$store.state.user.status == 'superuser'">
-          <b-nav-item to="/Admin">Super User</b-nav-item>
+        <div v-if="$store.state.user.ar == `superuser`">
+      <b-nav-item to="/Admin">Super User</b-nav-item>
         </div>
         <div v-if="$store.state.user.ff == 'phongsiri.pueng@gmail.com'">
           <b-nav-item to="/playground">PLAYGROUND</b-nav-item>
