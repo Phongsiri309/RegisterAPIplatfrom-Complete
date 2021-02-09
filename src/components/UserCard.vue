@@ -11,8 +11,11 @@
         >
         </b-form-select>
       </b-row>
-    </b-container>
-    <b-container
+          </b-container>
+          <p v-if="$store.state.loading">
+        <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
+      </p>
+    <b-container v-else
       v-for="(service, index, key) in this.$store.state.servicelist[0]"
       :key="service.id"
     >

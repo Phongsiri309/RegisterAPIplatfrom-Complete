@@ -1,7 +1,7 @@
 <template>
   <div id="RegInput" >
     <b-container >
-    
+    <b-overlay :show="show" rounded="sm">
       <b-input-group class="mt-3">
         <b-form-input
           v-model="Servicename"
@@ -10,6 +10,7 @@
         <b-form-input
           v-model.trim="$v.Endpoint.$model"
           placeholder="Endpoint . . ."
+          
 :class="{'is-invalid':$v.Endpoint.$error,'is-valid':!$v.Endpoint.$invalid}"
           ></b-form-input>
 <b-form-valid-feedback >Collect</b-form-valid-feedback>
@@ -89,6 +90,7 @@
         >
         
       </b-row>
+    </b-overlay>
     </b-container>
   </div>
 </template>
@@ -102,7 +104,7 @@ export default {
     Endpoint: { required, url, maxLength: maxLength(2083) }},
   data() {
     return {
-     
+      show: false,
       Servicename: "",
       Endpoint: "",
       Descriptions: "",
@@ -157,6 +159,8 @@ export default {
     
       this.$v.Endpoint.$touch()
       if(this.$v.Endpoint.$error) return
+
+      this.show = true
       let params = {
         page: this.currentPage,
         sort: this.Filter,
@@ -177,13 +181,13 @@ export default {
         .then(
           setTimeout(() => {
             this.$store.dispatch("servicelistUser",params);
+            this.show = false
           }, 3000)
-        )
-        // .then(
-        //   setTimeout(() => {
-        //     (this.Sname = ""), (this.Sentry = ""), (this.Description = "");
-        //   }, 3000)
-        // );
+        ).then(
+          setTimeout(() => {
+            (this.Servicename = ""), (this.Endpoint = ""), (this.Descriptions = "");
+          }, 3000)
+        );
     },
     
    

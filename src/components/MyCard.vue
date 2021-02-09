@@ -12,7 +12,12 @@
         </b-form-select>
       </b-row>
     </b-container>
+    <p v-if="$store.state.loading">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
+
+    </p>
     <b-container
+    v-else
       class="p-3 mb-1"
       :style="{ width: `60%` }"
       v-for="(service, index) in this.$store.state.servicelistUser[0]"
@@ -307,7 +312,7 @@ export default {
   data() {
     return {
       busy: false,
-
+    show: false,
       timeout: null,
          Filter: -1,
     Foptions: [
@@ -320,6 +325,7 @@ export default {
   },
 
   mounted() {
+    this.show = true
       let params = {
         page: this.currentPage,
         user_id: this.$store.state.user.yo,
@@ -330,12 +336,14 @@ export default {
     } else {
       setTimeout(() => {
         this.$store.dispatch("servicelistUser",params);
-      }, 3000);
+        this.show = false
+      }, 1000);
     }
   },
 
   methods: {
     deleteitem(service) {
+      this.show = true
       let params ={ 
         sort: this.Filter,
         page: this.currentPage,
@@ -345,11 +353,12 @@ export default {
         sid: service.ao,
         u: this.$store.state.user.yo,
       };
-      console.log(payload);
+      
       this.$store.dispatch("serviceDelete", payload).then(
         setTimeout(() => {
           this.$store.dispatch("servicelistUser",params);
-        }, 1000)
+          this.show = false
+        }, 3000)
       );
     },
     update(service) {
