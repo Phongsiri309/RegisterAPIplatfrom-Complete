@@ -29,6 +29,11 @@
           <b-dropdown-item href="/">
             <google-sign-in></google-sign-in>
           </b-dropdown-item>
+          <b-dropdown-item>
+            <line-sign-in>
+      
+            </line-sign-in>
+          </b-dropdown-item>
           <!-- <b-dropdown-item href="#">Sign Out</b-dropdown-item> -->
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -88,9 +93,10 @@
 
 <script>
 import GoogleSignIn from "./SignIn/GoogleSignIn.vue";
+import LineSignIn from './SignIn/LineSignIn.vue';
 export default {
   name: "Navigator",
-  components: { GoogleSignIn },
+  components: { GoogleSignIn, LineSignIn },
   mounted() {
     setInterval(() => {
       this.$store.state.user;
