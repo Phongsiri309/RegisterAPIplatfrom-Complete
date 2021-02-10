@@ -21,7 +21,7 @@
     <b-container
       v-else
       class="p-3 mb-1"
-      :style="{ width: `60%` }"
+   
       v-for="(service, index) in this.$store.state.servicelistUser[0]"
       :key="service.id"
     >
@@ -66,7 +66,7 @@
             />
           </h1>
           <b-card-title>
-            <b-container>
+            
               <b-row align-h="end">
                 <b-form-select
                   v-model="service.od"
@@ -86,7 +86,7 @@
                   >
                 </b-form-select>
               </b-row>
-            </b-container>
+            
             <h6>Author : {{ service.fh }}</h6>
           </b-card-title>
         </b-card-header>
