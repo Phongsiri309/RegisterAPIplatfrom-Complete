@@ -64,7 +64,29 @@
             />
           </h1>
           <b-card-title>
+            <b-container>
+              <b-row align-h="end">
+                <b-form-select
+                    v-model="service.od"
+
+                    :style="{
+                      width:`95px`,
+                       border: `none`,
+                      color: `white`,
+                      backgroundColor: `rgba(0, 0, 0, 0)`,
+                    }"
+                    v-on:change="update(service)"
+                  >
+                    <b-form-select-option value="public">Public</b-form-select-option>
+                    <b-form-select-option value="private"
+                      >Private</b-form-select-option
+                    >
+                  </b-form-select>
+              </b-row>
+            </b-container>
             <h6>Author : {{ service.fh }}</h6>
+            
+            
           </b-card-title>
         </b-card-header>
 

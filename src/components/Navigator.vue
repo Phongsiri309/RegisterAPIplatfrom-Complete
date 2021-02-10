@@ -136,9 +136,10 @@ a.dropdown-item {
     align-self: auto;
   }
 
-  a.router-link-exact-active {
+  #nav a.router-link-exact-active {
+    
     color: white;
-    background-color: darkred;
+    background-color: darkred
   }
 }
 </style>

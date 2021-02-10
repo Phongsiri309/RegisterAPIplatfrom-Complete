@@ -163,16 +163,18 @@ export default new Vuex.Store({
       axios
         .post("https://restfulapipython.herokuapp.com/v1/APIs/urlval", payload)
         .then((res) => {
-          commit("SET_URLVAL", res.data[1]);
+          commit("SET_URLVAL", res.data);
+
         });
     },
     Superlist({ commit }, params) {
+      this.state.loading = true
       axios
         .get("https://restfulapipython.herokuapp.com/v1/APIs/admins", {params})
         .then((res) => {
-          console.log(res.data)
           commit("SET_SUPERLIST", res.data[0]);
-        });
+          this.state.loading = false
+        })
     },
     SuperDelete({ commit }, payload) {
       commit("SET_SUPERDELETE",payload);
@@ -190,9 +192,9 @@ export default new Vuex.Store({
     SuperUpdate({ commit }, payload) {
       commit("SET_SUPERUPDATE", payload);
       axios.patch(
-        "https://restfulapipython.herokuapp.com/v1/APIs/admins/service/update"
-        ,
-      this.state.superUpdate);
+        "https://restfulapipython.herokuapp.com/v1/APIs/admins/service/update",
+        this.state.superUpdate
+      );
     }
   },
   modules: {},

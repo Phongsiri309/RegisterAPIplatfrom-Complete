@@ -65,6 +65,26 @@
               ondblclick="this.readOnly='';"
             />
           </h1>
+          <b-container>
+              <b-row align-h="end">
+                <b-form-select
+                    v-model="service.od"
+
+                    :style="{
+                      width:`95px`,
+                       border: `none`,
+                      color: `white`,
+                      backgroundColor: `rgba(0, 0, 0, 0)`,
+                    }"
+                    v-on:change="Supdate(service)"
+                  >
+                    <b-form-select-option value="public">Public</b-form-select-option>
+                    <b-form-select-option value="private"
+                      >Private</b-form-select-option
+                    >
+                  </b-form-select>
+              </b-row>
+            </b-container>
           <b-card-title>
             <h6>Author : {{ service.fh }}</h6>
           </b-card-title>
@@ -366,8 +386,8 @@ export default {
       },
       Supdate(service){
           let payload = {
-              Sname: service.am,
-              Enpoint: service.wo,
+              sname: service.am,
+              endpoint: service.wo,
               permiss: service.od,
               sid:service.ao,
               desc: service.sy,

@@ -31,7 +31,22 @@
             color: `#FFF9D7`,
           }"
         >
+        <span v-if="service.od == `public`">
+            <img
+              src="@/assets/icons8_earth_planet.png"
+              align="right"
+              :style="{ marginBottom: `15px` }"
+            />
+          </span>
+          <span v-else>
+            <img
+              src="@/assets/icons8_lock.png"
+              align="right"
+              :style="{ marginBottom: `15px` }"
+            />
+          </span>
           <h1>{{ service.am }}</h1>
+          
           <b-card-title
             ><h6>Author : {{ service.fh }}</h6></b-card-title
           >
@@ -117,11 +132,11 @@
 
               <div v-if="service.ny === 'GET'">
                 method :
-                <span class="bg-success text-white">{{ service.ny }}</span>
+                <span class="w-50 " :style="{color:`white`,backgroundColor:`green`,borderRadius:`10px 10px 10px 10px`}">{{ service.ny }}</span>
               </div>
-              <div v-else>
+              <div v-else >
                 method :
-                <span class="bg-primary text-white">{{ service.ny }}</span>
+                <span class=" w-50" :style="{color:`white`,backgroundColor:`blue`,borderRadius:`10px 10px 10px 10px`}">{{ service.ny }}</span>
               </div>
               <table class="table">
                 <thead>
