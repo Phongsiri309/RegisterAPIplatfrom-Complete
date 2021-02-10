@@ -196,7 +196,5 @@ export default {
 </script>
 
 <style>
-.input {
-  
-}
+
 </style>
