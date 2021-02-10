@@ -1,9 +1,7 @@
 <template>
   <div id="LineSignIn">
-      <div v-if="Displayname">
-          {{ Displayname }}
-      </div>
-      <div v-else>
+   
+      
       <VueLineLogin 
     client-id="1655659622"
     callback-uri="https://registerapiplatform-nectec.herokuapp.com/"
@@ -11,7 +9,7 @@
     @result="result" 
     login-text="LINE SignIn"
     ></VueLineLogin>
-    </div>
+
   </div>
 </template>
 
@@ -22,14 +20,9 @@ export default {
      components: {
         VueLineLogin
     },
-    data(){
-        return{
-            Displayname: ''
-        }
-    },
     methods: {
         result(res) {
-            this.Displayname = res.displayname
+            console.log(res)
         }
     }
 }
