@@ -66,25 +66,26 @@
             />
           </h1>
           <b-container>
-              <b-row align-h="end">
-                <b-form-select
-                    v-model="service.od"
-
-                    :style="{
-                      width:`95px`,
-                       border: `none`,
-                      color: `white`,
-                      backgroundColor: `rgba(0, 0, 0, 0)`,
-                    }"
-                    v-on:change="Supdate(service)"
-                  >
-                    <b-form-select-option value="public">Public</b-form-select-option>
-                    <b-form-select-option value="private"
-                      >Private</b-form-select-option
-                    >
-                  </b-form-select>
-              </b-row>
-            </b-container>
+            <b-row align-h="end">
+              <b-form-select
+                v-model="service.od"
+                :style="{
+                  width: `95px`,
+                  border: `none`,
+                  color: `white`,
+                  backgroundColor: `rgba(0, 0, 0, 0)`,
+                }"
+                v-on:change="Supdate(service)"
+              >
+                <b-form-select-option value="public"
+                  >Public</b-form-select-option
+                >
+                <b-form-select-option value="private"
+                  >Private</b-form-select-option
+                >
+              </b-form-select>
+            </b-row>
+          </b-container>
           <b-card-title>
             <h6>Author : {{ service.fh }}</h6>
           </b-card-title>
@@ -341,12 +342,12 @@ export default {
         { value: 1, text: "Date(Oldest)" },
       ],
       busy: false,
-    show: false,
+      show: false,
       timeout: null,
     };
   },
   mounted() {
-      this.show = true
+    this.show = true;
     let params = {
       page: this.currentPage,
       user_id: this.$store.state.user.yo,
@@ -354,51 +355,50 @@ export default {
       sort: this.Filter,
     };
     if (this.$store.state.user.yo) {
-          this.$store.dispatch("Superlist", params);
+      this.$store.dispatch("Superlist", params);
     } else {
       setTimeout(() => {
         this.$store.dispatch("Superlist", params);
-        this.show = false
+        this.show = false;
       }, 1000);
     }
   },
   methods: {
-      
-      Sdelete(service){
-          this.show = true
-          let payload = {
-              sid: service.ao,
-              u: this.$store.state.user.yo,
-              status: this.$store.state.user.ar
-          }
-          let params = {
-      page: this.currentPage,
-      user_id: this.$store.state.user.yo,
-      status: this.$store.state.user.ar,
-      sort: this.Filter,
-    };
-          this.$store.dispatch('SuperDelete',payload).then(
+    Sdelete(service) {
+      this.show = true;
+      let payload = {
+        sid: service.ao,
+        u: this.$store.state.user.yo,
+        status: this.$store.state.user.ar,
+      };
+      let params = {
+        page: this.currentPage,
+        user_id: this.$store.state.user.yo,
+        status: this.$store.state.user.ar,
+        sort: this.Filter,
+      };
+      this.$store.dispatch("SuperDelete", payload).then(
         setTimeout(() => {
-          this.$store.dispatch("servicelistUser",params);
-          this.show = false
+          this.$store.dispatch("servicelistUser", params);
+          this.show = false;
         }, 3000)
       );
-      },
-      Supdate(service){
-          let payload = {
-              sname: service.am,
-              endpoint: service.wo,
-              permiss: service.od,
-              sid:service.ao,
-              desc: service.sy,
-              methods: service.ny,
-              parameter: service.oa,
-              status: this.$store.state.user.ar,
-              u: this.$store.state.user.yo
-          }
-          this.$store.dispatch('SuperUpdate',payload)
-      },
-      checkurl(service) {
+    },
+    Supdate(service) {
+      let payload = {
+        sname: service.am,
+        endpoint: service.wo,
+        permiss: service.od,
+        sid: service.ao,
+        desc: service.sy,
+        methods: service.ny,
+        parameter: service.oa,
+        status: this.$store.state.user.ar,
+        u: this.$store.state.user.yo,
+      };
+      this.$store.dispatch("SuperUpdate", payload);
+    },
+    checkurl(service) {
       this.busy = true;
 
       let payload = {
@@ -429,23 +429,30 @@ export default {
       // Return focus to the button once hidden
       this.$refs.button.focus();
     },
-    
   },
-   watch: {
-    currentPage: function (val){
+  watch: {
+    currentPage: function(val) {
       let params = {
-    page: this.currentPage,
-      user_id: this.$store.state.user.yo,
-      status: this.$store.state.user.ar,
-      sort: this.Filter,
+        page: this.currentPage,
+        user_id: this.$store.state.user.yo,
+        status: this.$store.state.user.ar,
+        sort: this.Filter,
       };
-    if(val > 0){
-      this.$store.dispatch("Superlist", params);
-    }
-    }
-  }
-  
+      if (val > 0) {
+        this.$store.dispatch("Superlist", params);
+      }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  width: 60%;
+}
+@media only screen and (max-width: 420px) {
+  .container {
+    width: unset;
+  }
+}
+</style>

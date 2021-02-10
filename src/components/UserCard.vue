@@ -11,11 +11,15 @@
         >
         </b-form-select>
       </b-row>
-          </b-container>
-          <p v-if="$store.state.loading">
-        <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
-      </p>
-    <b-container v-else
+    </b-container>
+    <p v-if="$store.state.loading">
+      <b-spinner
+        style="width: 3rem; height: 3rem;"
+        label="Large Spinner"
+      ></b-spinner>
+    </p>
+    <b-container
+      v-else
       v-for="(service, index, key) in this.$store.state.servicelist[0]"
       :key="service.id"
     >
@@ -31,7 +35,7 @@
             color: `#FFF9D7`,
           }"
         >
-        <span v-if="service.od == `public`">
+          <span v-if="service.od == `public`">
             <img
               src="@/assets/icons8_earth_planet.png"
               align="right"
@@ -46,7 +50,7 @@
             />
           </span>
           <h1>{{ service.am }}</h1>
-          
+
           <b-card-title
             ><h6>Author : {{ service.fh }}</h6></b-card-title
           >
@@ -132,11 +136,27 @@
 
               <div v-if="service.ny === 'GET'">
                 method :
-                <span class="w-50 " :style="{color:`white`,backgroundColor:`green`,borderRadius:`10px 10px 10px 10px`}">{{ service.ny }}</span>
+                <span
+                  class="w-50 "
+                  :style="{
+                    color: `white`,
+                    backgroundColor: `green`,
+                    borderRadius: `10px 10px 10px 10px`,
+                  }"
+                  >{{ service.ny }}</span
+                >
               </div>
-              <div v-else >
+              <div v-else>
                 method :
-                <span class=" w-50" :style="{color:`white`,backgroundColor:`blue`,borderRadius:`10px 10px 10px 10px`}">{{ service.ny }}</span>
+                <span
+                  class=" w-50"
+                  :style="{
+                    color: `white`,
+                    backgroundColor: `blue`,
+                    borderRadius: `10px 10px 10px 10px`,
+                  }"
+                  >{{ service.ny }}</span
+                >
               </div>
               <table class="table">
                 <thead>
@@ -189,25 +209,22 @@ export default {
       perPage: 10,
       busy: false,
       timeout: null,
-        Filter: -1,
-    Foptions: [
-      { value: -1, text: "Date(Lastest)" },
-      { value: 1, text: "Date(Oldest)" },
-    ],
-    currentPage: 1,
-
-      
+      Filter: -1,
+      Foptions: [
+        { value: -1, text: "Date(Lastest)" },
+        { value: 1, text: "Date(Oldest)" },
+      ],
+      currentPage: 1,
     };
   },
   mounted() {
-     let params = {
-        page: this.currentPage,
-        sort: this.Filter
-      };
-    
+    let params = {
+      page: this.currentPage,
+      sort: this.Filter,
+    };
+
     this.$store.dispatch("servicelist", params);
 
-   
     //  .then(
     //       setInterval(() =>{
     //        this.$store.dispatch('servicelist')
@@ -247,25 +264,24 @@ export default {
       this.$refs.button.focus();
     },
     sortFilter() {
-       let params = {
+      let params = {
         page: this.currentPage,
-        sort: this.Filter
+        sort: this.Filter,
       };
       this.$store.dispatch("servicelist", params);
     },
-   
   },
   watch: {
-    currentPage: function (val){
+    currentPage: function(val) {
       let params = {
         page: this.currentPage,
-        sort: this.Filter
+        sort: this.Filter,
       };
-    if(val > 0){
-      this.$store.dispatch("servicelist", params);
-    }
-    }
-  }
+      if (val > 0) {
+        this.$store.dispatch("servicelist", params);
+      }
+    },
+  },
 };
 </script>
 

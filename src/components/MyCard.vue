@@ -1,6 +1,6 @@
 <template>
   <div id="Mycard">
-     <b-container>
+    <b-container>
       <b-row align-h="end">
         <h4 class="pr-3">Sort By</h4>
         <b-form-select
@@ -13,11 +13,13 @@
       </b-row>
     </b-container>
     <p v-if="$store.state.loading">
-      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
-
+      <b-spinner
+        style="width: 3rem; height: 3rem;"
+        label="Large Spinner"
+      ></b-spinner>
     </p>
     <b-container
-    v-else
+      v-else
       class="p-3 mb-1"
       :style="{ width: `60%` }"
       v-for="(service, index) in this.$store.state.servicelistUser[0]"
@@ -67,26 +69,25 @@
             <b-container>
               <b-row align-h="end">
                 <b-form-select
-                    v-model="service.od"
-
-                    :style="{
-                      width:`95px`,
-                       border: `none`,
-                      color: `white`,
-                      backgroundColor: `rgba(0, 0, 0, 0)`,
-                    }"
-                    v-on:change="update(service)"
+                  v-model="service.od"
+                  :style="{
+                    width: `95px`,
+                    border: `none`,
+                    color: `white`,
+                    backgroundColor: `rgba(0, 0, 0, 0)`,
+                  }"
+                  v-on:change="update(service)"
+                >
+                  <b-form-select-option value="public"
+                    >Public</b-form-select-option
                   >
-                    <b-form-select-option value="public">Public</b-form-select-option>
-                    <b-form-select-option value="private"
-                      >Private</b-form-select-option
-                    >
-                  </b-form-select>
+                  <b-form-select-option value="private"
+                    >Private</b-form-select-option
+                  >
+                </b-form-select>
               </b-row>
             </b-container>
             <h6>Author : {{ service.fh }}</h6>
-            
-            
           </b-card-title>
         </b-card-header>
 
@@ -315,7 +316,7 @@
         </b-collapse>
       </b-card>
     </b-container>
-     <b-container>
+    <b-container>
       <b-row align-h="end">
         <b-pagination
           v-model="currentPage"
@@ -334,52 +335,52 @@ export default {
   data() {
     return {
       busy: false,
-    show: false,
+      show: false,
       timeout: null,
-         Filter: -1,
-    Foptions: [
-      { value: -1, text: "Date(Lastest)" },
-      { value: 1, text: "Date(Oldest)" },
-    ],
-    currentPage: 1,
-    perPage: 10
+      Filter: -1,
+      Foptions: [
+        { value: -1, text: "Date(Lastest)" },
+        { value: 1, text: "Date(Oldest)" },
+      ],
+      currentPage: 1,
+      perPage: 10,
     };
   },
 
   mounted() {
-    this.show = true
-      let params = {
-        page: this.currentPage,
-        user_id: this.$store.state.user.yo,
-        sort: this.Filter
-      };
+    this.show = true;
+    let params = {
+      page: this.currentPage,
+      user_id: this.$store.state.user.yo,
+      sort: this.Filter,
+    };
     if (this.$store.state.user.yo) {
-      this.$store.dispatch("servicelistUser",params);
+      this.$store.dispatch("servicelistUser", params);
     } else {
       setTimeout(() => {
-        this.$store.dispatch("servicelistUser",params);
-        this.show = false
+        this.$store.dispatch("servicelistUser", params);
+        this.show = false;
       }, 1000);
     }
   },
 
   methods: {
     deleteitem(service) {
-      this.show = true
-      let params ={ 
+      this.show = true;
+      let params = {
         sort: this.Filter,
         page: this.currentPage,
-        user_id: this.$store.state.user.yo
-      }
+        user_id: this.$store.state.user.yo,
+      };
       let payload = {
         sid: service.ao,
         u: this.$store.state.user.yo,
       };
-      
+
       this.$store.dispatch("serviceDelete", payload).then(
         setTimeout(() => {
-          this.$store.dispatch("servicelistUser",params);
-          this.show = false
+          this.$store.dispatch("servicelistUser", params);
+          this.show = false;
         }, 3000)
       );
     },
@@ -427,20 +428,28 @@ export default {
       // Return focus to the button once hidden
       this.$refs.button.focus();
     },
-    
   },
-   watch: {
-    currentPage: function (val){
+  watch: {
+    currentPage: function(val) {
       let params = {
         page: this.currentPage,
-        sort: this.Filter
+        sort: this.Filter,
       };
-    if(val > 0){
-      this.$store.dispatch("servicelist", params);
-    }
-    }
-  }
+      if (val > 0) {
+        this.$store.dispatch("servicelist", params);
+      }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  width: 60%;
+}
+@media only screen and (max-width: 420px) {
+  .container {
+    width: unset;
+  }
+}
+</style>
