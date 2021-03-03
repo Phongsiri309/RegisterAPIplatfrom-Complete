@@ -43,7 +43,8 @@ export default new Vuex.Store({
     urlval: {},
     superuserlist: [],
     superDelete: {},
-    superUpdate: {}
+    superUpdate: {},
+    Linesignin: {}
   
   },
   mutations: {
@@ -82,6 +83,9 @@ export default new Vuex.Store({
     },
     SET_SUPERUPDATE(state, updates) {
       state.superUpdate = updates
+    },
+    SET_LINESIGNIN(state, signin) {
+      state.Linesignin = signin
     }
   },
   actions: {
@@ -195,6 +199,24 @@ export default new Vuex.Store({
         "https://restfulapipython.herokuapp.com/v1/APIs/admins/service/update",
         this.state.superUpdate
       );
+    },
+    Linelogin({ commit }, payload) {
+      commit("SET_LINESIGNIN", payload);
+      axios.post("https://fastpymongo.herokuapp.com/v1/api/linelogin",
+        {
+
+            access_token: this.state.Linesignin.access_token,
+            displayname: this.state.Linesignin.displayName,
+            ul_id: this.state.Linesignin.userId,
+            picture: this.state.Linesignin.pictureUrl,
+            id_li_tk: this.state.Linesignin.id_token
+        
+      }
+      ).then(
+        res => {
+          console.log(res)
+        }
+      )
     }
   },
   modules: {},

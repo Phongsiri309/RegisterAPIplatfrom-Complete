@@ -1,13 +1,12 @@
 <template>
   <div id="LineSignIn">
-   
       
       <VueLineLogin 
     client-id="1655659622"
-    callback-uri="https://registerapiplatform-nectec.herokuapp.com/"
+    callback-uri="https://localhost:8080/"
     client-secret="92951dff9baf71e6956c4d456848aa9b"
     @result="result" 
-    login-text="LINE SignIn"
+    login-text="Link LINE"
     ></VueLineLogin>
 
   </div>
@@ -22,7 +21,7 @@ export default {
     },
     methods: {
         result(res) {
-            console.log(res)
+            this.$store.dispatch("Linelogin",res)
         }
     }
 }

@@ -44,6 +44,11 @@ const routes = [
     name: "playground",
     component: () => import("../views/playground.vue"),
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("../views/Profile.vue")
+  }
 ];
 
 const router = new VueRouter({

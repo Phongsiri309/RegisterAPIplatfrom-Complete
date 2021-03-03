@@ -26,13 +26,16 @@
             {{ $store.state.user.ff }}
           </template>
           <template #button-content v-else> SignIn </template>
-          <b-dropdown-item href="/">
+          <b-dropdown-item href="/" >
             <google-sign-in></google-sign-in>
           </b-dropdown-item>
-          <b-dropdown-item>
-            <!-- <line-sign-in>
+          <b-dropdown-item  to="/profile" v-if="$store.state.user">
+              <b-row align-h="center">Profile</b-row>
+          </b-dropdown-item>
+          <b-dropdown-item v-else>
+            <line-sign-in>
       
-            </line-sign-in> -->
+            </line-sign-in>
           </b-dropdown-item>
           <!-- <b-dropdown-item href="#">Sign Out</b-dropdown-item> -->
         </b-nav-item-dropdown>
@@ -93,10 +96,10 @@
 
 <script>
 import GoogleSignIn from "./SignIn/GoogleSignIn.vue";
-// import LineSignIn from './SignIn/LineSignIn.vue';
+import LineSignIn from './SignIn/LineSignIn.vue';
 export default {
   name: "Navigator",
-  components: { GoogleSignIn },
+  components: { GoogleSignIn, LineSignIn },
   mounted() {
     setInterval(() => {
       this.$store.state.user;
